@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hrcomp.co.kr/sitemap.xml
