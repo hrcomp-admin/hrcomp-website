@@ -6,15 +6,15 @@ function loadPdfJs(){return new Promise((resolve,reject)=>{if(window.pdfjsLib)re
 function element(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el}
 async function renderPages(x,viewer,status,zoomLabel){
   const lib=await loadPdfJs();
-  const task=lib.getDocument({url:'../'+x.catalog,withCredentials:false});
+  const task=lib.getDocument({url:'../'+(x.series_pdf||x.catalog),withCredentials:false});
   const doc=await task.promise;
-  const start=Math.max(1,Number(x.start)||1),end=Math.min(doc.numPages,Number(x.end)||doc.numPages);
+  const start=x.series_pdf?1:Math.max(1,Number(x.start)||1),end=x.series_pdf?doc.numPages:Math.min(doc.numPages,Number(x.end)||doc.numPages);
   if(end<start)throw Error('Invalid catalogue page range');
   const holders=[];
   for(let n=start;n<=end;n++){
     const holder=element('div','pdf-page');holder.dataset.page=n;
-    holder.append(element('div','pdf-page-label',`원본 카탈로그 ${n}페이지`));
-    const canvas=document.createElement('canvas');canvas.setAttribute('aria-label',`카탈로그 ${n}페이지`);holder.append(canvas);viewer.append(holder);holders.push(holder);
+    holder.append(element('div','pdf-page-label',`원본 카탈로그 ${x.series_pdf?(Number(x.start)+n-1):n}페이지`));
+    const canvas=document.createElement('canvas');canvas.setAttribute('aria-label',`카탈로그 ${x.series_pdf?(Number(x.start)+n-1):n}페이지`);holder.append(canvas);viewer.append(holder);holders.push(holder);
   }
   let zoom=1,run=0;
   async function draw(holder,token){
@@ -22,7 +22,7 @@ async function renderPages(x,viewer,status,zoomLabel){
     if(token!==run)return;
     const available=Math.min(viewer.clientWidth-32,950);
     const base=available/page.getViewport({scale:1}).width;
-    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const dpr=Math.min(window.devicePixelRatio||1,3);
     const viewport=page.getViewport({scale:base*zoom*dpr});
     const canvas=holder.querySelector('canvas');canvas.width=Math.ceil(viewport.width);canvas.height=Math.ceil(viewport.height);
     canvas.style.width=Math.round(viewport.width/dpr)+'px';canvas.style.height=Math.round(viewport.height/dpr)+'px';
@@ -33,7 +33,7 @@ async function renderPages(x,viewer,status,zoomLabel){
   async function redraw(){
     const token=++run;zoomLabel.textContent=Math.round(zoom*100)+'%';
     for(const h of holders){h.classList.remove('rendered');await draw(h,token);if(token!==run)return;}
-    status.textContent=`${x.series} · ${start}–${end}페이지 (${holders.length}페이지)`;
+    status.textContent=`${x.series} · 원본 ${x.start}–${x.end}페이지 (${holders.length}페이지)`;
   }
   return {redraw,zoomIn(){zoom=Math.min(zoom+0.2,2);redraw()},zoomOut(){zoom=Math.max(zoom-0.2,0.6);redraw()}};
 }
@@ -51,7 +51,7 @@ fetch('../data/products.json').then(r=>{if(!r.ok)throw Error('product data');ret
   const info=element('div');info.append(element('span','tag',x.maker+' / '+x.category),element('h2','',x.series),element('p','lead',x.name),element('p','lead','원본 카탈로그 '+x.start+'–'+x.end+'페이지'));
   const actions=element('div','actions');const back=element('a','btn light','← 제품 목록으로 돌아가기');back.href='index.html?maker='+encodeURIComponent(x.maker);actions.append(back);info.append(actions);section.append(visual,info);
   const pdf=element('section','pdfbox');pdf.append(element('h3','','제품 기술자료 · '+x.series));
-  const tip=element('p','lead','제조사 원본 PDF에서 이 Series에 해당하는 페이지만 표시합니다. 원본 파일은 변경하지 않습니다.');pdf.append(tip);
+  const tip=element('p','lead',x.series_pdf?'이 Series의 기술자료만 별도 PDF로 불러옵니다. 제조사 원본 카탈로그는 그대로 보존합니다.':'제조사 원본 PDF에서 이 Series에 해당하는 페이지만 표시합니다. 원본 파일은 변경하지 않습니다.');pdf.append(tip);
   const controls=element('div','pdf-controls');const status=element('span','pdf-status','기술자료를 불러오는 중…');
   const zoomOut=element('button','pdf-control','−');zoomOut.type='button';zoomOut.setAttribute('aria-label','축소');
   const zoomLabel=element('span','pdf-zoom','100%');const zoomIn=element('button','pdf-control','+');zoomIn.type='button';zoomIn.setAttribute('aria-label','확대');

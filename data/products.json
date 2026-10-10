@@ -10,7 +10,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-1.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-1.webp"
+    "hero_image": "assets/images/series/s-1.webp",
+    "series_pdf": "catalog/series/s-1-dpf-ts.pdf"
   },
   {
     "id": "s-2",
