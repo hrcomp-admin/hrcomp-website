@@ -45,3 +45,8 @@
 .pdf-series-viewer{contain:layout paint;scrollbar-width:thin}
 .pdf-page canvas{transform:translateZ(0);backface-visibility:hidden}
 @media(max-width:780px){.pdf-series-viewer{touch-action:pan-x pan-y;overscroll-behavior:contain}}
+
+/* V7 sample: center fit-width canvases without affecting zoomed horizontal panning. */
+@media(max-width:780px){
+  .pdf-page canvas{margin-inline:auto;}
+}
