@@ -14,3 +14,11 @@
  .product-card-v3 .body p{font-size:12px;line-height:1.5;margin:0 0 9px}
  .product-card-v3 .body b{font-size:11px}
 }
+
+/* V5: shorter mobile catalogue introduction */
+@media(max-width:780px){
+  body:has(#makers) .pagehead{padding-top:26px;padding-bottom:28px}
+  body:has(#makers) .pagehead .wrap{padding-top:0;padding-bottom:0}
+  body:has(#makers) .pagehead h1{margin-top:12px;margin-bottom:10px}
+  body:has(#makers) .pagehead .lead{margin-bottom:0}
+}

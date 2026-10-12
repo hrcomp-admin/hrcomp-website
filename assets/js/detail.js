@@ -24,6 +24,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     holders.push(holder);
   }
 
+  const pilot = x.series === "DPF-T/S";
   let zoom=1;
   let generation=0;
   let active=false;
@@ -66,6 +67,8 @@ async function renderPages(x, viewer, status, zoomLabel) {
     const placeholder=holder.querySelector('.pdf-placeholder');
     if(placeholder)placeholder.remove();
     holder.append(canvas);
+    holder.style.minHeight="";
+    holder.style.minWidth="";
     holder.classList.add('rendered');
     rendered.set(holder,token);
   }
@@ -86,10 +89,25 @@ async function renderPages(x, viewer, status, zoomLabel) {
     } finally {active=false;}
   }
 
-  function updateZoom(next) {
+  function updateZoom(next, focus) {
+    const oldZoom=zoom;
+    const anchor=focus || {x:viewer.clientWidth/2,y:viewer.clientHeight/2};
+    const contentX=viewer.scrollLeft+anchor.x;
+    const contentY=viewer.scrollTop+anchor.y;
     const value=Math.max(0.8,Math.min(4,next));
     if(value===zoom)return;
     zoom=value;
+    // Preserve the reading position across resolution changes.
+    const ratio=value/oldZoom;
+    for(const holder of holders){
+      const canvas=holder.querySelector("canvas");
+      if(canvas){
+        const w=parseFloat(canvas.style.width)||canvas.clientWidth;
+        const h=parseFloat(canvas.style.height)||canvas.clientHeight;
+        holder.style.minHeight=Math.round(h*ratio+25)+"px";
+        holder.style.minWidth=Math.round(w*ratio)+"px";
+      }
+    }
     zoomLabel.textContent=Math.round(zoom*100)+'%';
     generation++;
     rendered.clear();
@@ -100,31 +118,57 @@ async function renderPages(x, viewer, status, zoomLabel) {
       if(!holder.querySelector('.pdf-placeholder'))holder.append(element('div','pdf-placeholder','선명하게 다시 표시하는 중…'));
     }
     // Re-render visible pages at the new resolution.
-    visible.add(holders[0]);
-    requestAnimationFrame(()=>{schedule();});
+    if(pilot){
+      requestAnimationFrame(()=>{
+        viewer.scrollLeft=Math.max(0,contentX*ratio-anchor.x);
+        viewer.scrollTop=Math.max(0,contentY*ratio-anchor.y);
+        schedule();
+      });
+    } else {
+      visible.add(holders[0]);
+      requestAnimationFrame(()=>schedule());
+    }
   }
 
-  // Touch: native one-finger scrolling; two-finger pinch changes the PDF zoom.
-  // Avoid preventing native scrolling unless a two-finger gesture is active.
+  // Pilot: compositor-only pinch preview, followed by one high-resolution redraw.
+  // Native one-finger scrolling is retained for horizontal/vertical panning.
   let pinchStart=null;
-  const distance=touches=>Math.hypot(touches[0].clientX-touches[1].clientX,touches[0].clientY-touches[1].clientY);
+  let pinchNext=1;
+  const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+  const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
+  function preview(scale,center){
+    if(!pilot)return;
+    const bounds=viewer.getBoundingClientRect();
+    const x=center.x-bounds.left+viewer.scrollLeft;
+    const y=center.y-bounds.top+viewer.scrollTop;
+    viewer.querySelectorAll('.pdf-page canvas').forEach(c=>{
+      c.style.transformOrigin='0 0';
+      c.style.transform=`scale(${scale})`;
+    });
+    viewer.classList.add('is-pinching');
+  }
+  function clearPreview(){
+    viewer.querySelectorAll('.pdf-page canvas').forEach(c=>{c.style.transform='';c.style.transformOrigin='';});
+    viewer.classList.remove('is-pinching');
+  }
   viewer.addEventListener('touchstart',e=>{
-    if(e.touches.length===2)pinchStart={distance:distance(e.touches),zoom};
+    if(e.touches.length===2){pinchStart={distance:distance(e.touches),zoom,center:midpoint(e.touches)};pinchNext=zoom;}
   },{passive:true});
   viewer.addEventListener('touchmove',e=>{
     if(!pinchStart||e.touches.length!==2)return;
     e.preventDefault();
-    const next=Math.max(.8,Math.min(4,pinchStart.zoom*distance(e.touches)/pinchStart.distance));
-    zoomLabel.textContent=Math.round(next*100)+'%';
-    viewer.dataset.pinchZoom=String(next);
+    pinchNext=Math.max(.8,Math.min(4,pinchStart.zoom*distance(e.touches)/Math.max(1,pinchStart.distance)));
+    zoomLabel.textContent=Math.round(pinchNext*100)+'%';
+    if(pilot)preview(pinchNext/pinchStart.zoom,midpoint(e.touches));
   },{passive:false});
   const finishPinch=()=>{
     if(!pinchStart)return;
-    const next=Number(viewer.dataset.pinchZoom);
+    const center=pinchStart.center;
+    const next=pinchNext;
     pinchStart=null;
-    delete viewer.dataset.pinchZoom;
-    if(Number.isFinite(next)&&next>0)updateZoom(next);
-    else zoomLabel.textContent=Math.round(zoom*100)+'%';
+    clearPreview();
+    const bounds=viewer.getBoundingClientRect();
+    if(Number.isFinite(next)&&next>0)updateZoom(next,{x:center.x-bounds.left,y:center.y-bounds.top});
   };
   viewer.addEventListener('touchend',e=>{if(e.touches.length<2)finishPinch()},{passive:true});
   viewer.addEventListener('touchcancel',finishPinch,{passive:true});
