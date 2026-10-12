@@ -61,3 +61,11 @@
 
 /* V9: avoid forcing PDF canvases into stale GPU raster tiles on Android. */
 .pdf-page canvas{transform:none!important;backface-visibility:visible!important;will-change:auto!important}
+
+/* CSS diagnostic: disable isolated paint/compositing hints on mobile.
+   Preserve layout, centering and scroll rules. */
+@media (max-width:780px){
+  .pdf-series-viewer{contain:none!important;}
+  .pdf-series-viewer.is-pinching canvas{will-change:auto!important;}
+  .pdf-page canvas{transform:none!important;backface-visibility:visible!important;will-change:auto!important;}
+}
