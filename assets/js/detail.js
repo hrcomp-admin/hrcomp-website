@@ -46,6 +46,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     schedule();
   }, {root:viewer,rootMargin:'120px 0px'});
 
+  // V11: render every short pilot PDF page at zoom, independent of intersection state.
   // A single rendering queue prevents several high-resolution canvases
   // from exhausting memory on mobile devices.
   async function draw(holder,token) {
@@ -90,7 +91,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     try {
       while(true) {
         const token=generation;
-        const target=holders.find(h=>visible.has(h)&&rendered.get(h)!==token&&!pending.has(h));
+        const target=holders.find(h=>(visible.has(h)||(pilot && mobile && zoom>1.001))&&rendered.get(h)!==token&&!pending.has(h));
         if(!target)break;
         pending.add(target);
         try { await draw(target,token); }
@@ -101,7 +102,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
       active=false;
       // A zoom may invalidate an in-flight render. The earlier schedule()
       // returns while active=true, so explicitly restart the queue here.
-      if(!isPinching && holders.some(h=>visible.has(h) && rendered.get(h)!==generation && !pending.has(h))) {
+      if(!isPinching && holders.some(h=>(visible.has(h)||(pilot && mobile && zoom>1.001)) && rendered.get(h)!==generation && !pending.has(h))) {
         queueMicrotask(schedule);
       }
     }
