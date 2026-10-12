@@ -24,10 +24,15 @@ async function renderPages(x, viewer, status, zoomLabel) {
     holders.push(holder);
   }
 
-  const pilot = x.series === "DPF-T/S";
+  const pilot = x.series === 'DPF-T/S' || x.series === 'DPF(O)';
+  const mobile = matchMedia('(max-width:780px)').matches;
+  const perfStart=performance.now();
+  let firstPaintDone=false;
   let zoom=1;
   let generation=0;
   let active=false;
+  let isPinching=false;
+  let settleTimer=null;
   const rendered=new Map();
   const pending=new Set();
   const visible=new Set();
@@ -37,7 +42,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
       else visible.delete(entry.target);
     }
     schedule();
-  }, {root:viewer,rootMargin:'350px 0px'});
+  }, {root:viewer,rootMargin:'120px 0px'});
 
   // A single rendering queue prevents several high-resolution canvases
   // from exhausting memory on mobile devices.
@@ -50,8 +55,9 @@ async function renderPages(x, viewer, status, zoomLabel) {
     const displayScale=baseWidth/viewport0.width*zoom;
     const cssViewport=page.getViewport({scale:displayScale});
     // Cap backing pixels to avoid browser canvas limits on phones.
-    const dpr=Math.min(window.devicePixelRatio||1,2);
-    const maxPixels=12000000;
+    // Mobile first paint: use a light canvas. Sharpen only after a deliberate zoom.
+    const dpr=mobile ? (zoom>1.45 ? Math.min(devicePixelRatio||1,1.65) : 1) : Math.min(devicePixelRatio||1,2);
+    const maxPixels=mobile ? 4200000 : 12000000;
     const pixelFactor=Math.min(dpr,Math.sqrt(maxPixels/(cssViewport.width*cssViewport.height)));
     const viewport=page.getViewport({scale:displayScale*pixelFactor});
     const canvas=document.createElement('canvas');
@@ -67,14 +73,15 @@ async function renderPages(x, viewer, status, zoomLabel) {
     const placeholder=holder.querySelector('.pdf-placeholder');
     if(placeholder)placeholder.remove();
     holder.append(canvas);
-    holder.style.minHeight="";
-    holder.style.minWidth="";
+    holder.style.minHeight='';
+    holder.style.minWidth='';
+    if(!firstPaintDone){firstPaintDone=true;console.info('[HR COMP V6] first PDF page rendered in',Math.round(performance.now()-perfStart),'ms (excluding library/document loading)');}
     holder.classList.add('rendered');
     rendered.set(holder,token);
   }
 
   async function schedule() {
-    if(active)return;
+    if(active||isPinching)return;
     active=true;
     try {
       while(true) {
@@ -89,86 +96,63 @@ async function renderPages(x, viewer, status, zoomLabel) {
     } finally {active=false;}
   }
 
-  function updateZoom(next, focus) {
-    const oldZoom=zoom;
-    const anchor=focus || {x:viewer.clientWidth/2,y:viewer.clientHeight/2};
-    const contentX=viewer.scrollLeft+anchor.x;
-    const contentY=viewer.scrollTop+anchor.y;
-    const value=Math.max(0.8,Math.min(4,next));
-    if(value===zoom)return;
+  // Resize the already rendered bitmap immediately. This avoids blanking the
+  // viewer on every gesture and makes touch interactions compositor-friendly.
+  function resizePages(next, focus){
+    const value=Math.max(.8,Math.min(3.5,next));
+    const ratio=value/zoom;
+    if(Math.abs(ratio-1)<.001)return;
+    const rect=viewer.getBoundingClientRect();
+    const point=focus||{x:rect.width/2,y:rect.height/2};
+    const sx=viewer.scrollLeft+point.x,sy=viewer.scrollTop+point.y;
     zoom=value;
-    // Preserve the reading position across resolution changes.
-    const ratio=value/oldZoom;
-    for(const holder of holders){
-      const canvas=holder.querySelector("canvas");
-      if(canvas){
-        const w=parseFloat(canvas.style.width)||canvas.clientWidth;
-        const h=parseFloat(canvas.style.height)||canvas.clientHeight;
-        holder.style.minHeight=Math.round(h*ratio+25)+"px";
-        holder.style.minWidth=Math.round(w*ratio)+"px";
+    holders.forEach(h=>{
+      const c=h.querySelector('canvas');
+      if(c){
+        const w=parseFloat(c.style.width)||c.clientWidth;
+        const ht=parseFloat(c.style.height)||c.clientHeight;
+        c.style.width=Math.round(w*ratio)+'px';
+        c.style.height=Math.round(ht*ratio)+'px';
       }
-    }
+    });
     zoomLabel.textContent=Math.round(zoom*100)+'%';
-    generation++;
-    rendered.clear();
-    for(const holder of holders) {
-      const old=holder.querySelector('canvas');
-      if(old){old.remove();old.width=0;old.height=0;}
-      holder.classList.remove('rendered');
-      if(!holder.querySelector('.pdf-placeholder'))holder.append(element('div','pdf-placeholder','선명하게 다시 표시하는 중…'));
-    }
-    // Re-render visible pages at the new resolution.
-    if(pilot){
-      requestAnimationFrame(()=>{
-        viewer.scrollLeft=Math.max(0,contentX*ratio-anchor.x);
-        viewer.scrollTop=Math.max(0,contentY*ratio-anchor.y);
-        schedule();
-      });
-    } else {
-      visible.add(holders[0]);
-      requestAnimationFrame(()=>schedule());
-    }
+    viewer.scrollLeft=Math.max(0,sx*ratio-point.x);
+    viewer.scrollTop=Math.max(0,sy*ratio-point.y);
   }
+  // High-resolution replacement is deliberately delayed and restricted to
+  // pages near the viewport. Never erase the old bitmap before replacement.
+  function sharpen(){
+    clearTimeout(settleTimer);
+    settleTimer=setTimeout(()=>{
+      if(isPinching)return;
+      generation++;
+      rendered.clear();
+      schedule();
+    },420);
+  }
+  function updateZoom(next,focus){resizePages(next,focus);sharpen();}
 
-  // Pilot: compositor-only pinch preview, followed by one high-resolution redraw.
-  // Native one-finger scrolling is retained for horizontal/vertical panning.
-  let pinchStart=null;
-  let pinchNext=1;
+  let pinch=null;
   const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
   const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
-  function preview(scale,center){
-    if(!pilot)return;
-    const bounds=viewer.getBoundingClientRect();
-    const x=center.x-bounds.left+viewer.scrollLeft;
-    const y=center.y-bounds.top+viewer.scrollTop;
-    viewer.querySelectorAll('.pdf-page canvas').forEach(c=>{
-      c.style.transformOrigin='0 0';
-      c.style.transform=`scale(${scale})`;
-    });
-    viewer.classList.add('is-pinching');
-  }
-  function clearPreview(){
-    viewer.querySelectorAll('.pdf-page canvas').forEach(c=>{c.style.transform='';c.style.transformOrigin='';});
-    viewer.classList.remove('is-pinching');
-  }
   viewer.addEventListener('touchstart',e=>{
-    if(e.touches.length===2){pinchStart={distance:distance(e.touches),zoom,center:midpoint(e.touches)};pinchNext=zoom;}
+    if(e.touches.length!==2)return;
+    clearTimeout(settleTimer);
+    isPinching=true;
+    pinch={distance:Math.max(1,distance(e.touches)),zoom,center:midpoint(e.touches)};
   },{passive:true});
   viewer.addEventListener('touchmove',e=>{
-    if(!pinchStart||e.touches.length!==2)return;
+    if(!pinch||e.touches.length!==2)return;
     e.preventDefault();
-    pinchNext=Math.max(.8,Math.min(4,pinchStart.zoom*distance(e.touches)/Math.max(1,pinchStart.distance)));
-    zoomLabel.textContent=Math.round(pinchNext*100)+'%';
-    if(pilot)preview(pinchNext/pinchStart.zoom,midpoint(e.touches));
+    const mid=midpoint(e.touches);
+    const rect=viewer.getBoundingClientRect();
+    resizePages(pinch.zoom*distance(e.touches)/pinch.distance,{x:mid.x-rect.left,y:mid.y-rect.top});
   },{passive:false});
   const finishPinch=()=>{
-    if(!pinchStart)return;
-    const center=pinchStart.center;
-    const next=pinchNext;
-    pinchStart=null;
-    clearPreview();
-    const bounds=viewer.getBoundingClientRect();
-    if(Number.isFinite(next)&&next>0)updateZoom(next,{x:center.x-bounds.left,y:center.y-bounds.top});
+    if(!pinch)return;
+    pinch=null;
+    isPinching=false;
+    sharpen();
   };
   viewer.addEventListener('touchend',e=>{if(e.touches.length<2)finishPinch()},{passive:true});
   viewer.addEventListener('touchcancel',finishPinch,{passive:true});
