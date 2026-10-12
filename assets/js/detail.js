@@ -29,6 +29,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
   const perfStart=performance.now();
   let firstPaintDone=false;
   let zoom=1;
+  const baseCanvasSizes=new WeakMap();
   let generation=0;
   let active=false;
   let isPinching=false;
@@ -65,6 +66,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     canvas.height=Math.max(1,Math.floor(viewport.height));
     canvas.style.width=Math.round(cssViewport.width)+'px';
     canvas.style.height=Math.round(cssViewport.height)+'px';
+    baseCanvasSizes.set(holder,{width:cssViewport.width/zoom,height:cssViewport.height/zoom});
     const rendering=page.render({canvasContext:canvas.getContext('2d',{alpha:false}),viewport});
     try { await rendering.promise; } catch(err) { if(token===generation) throw err; return; }
     if(token!==generation) {canvas.width=0;canvas.height=0;return;}
@@ -100,30 +102,31 @@ async function renderPages(x, viewer, status, zoomLabel) {
   // Resize the already rendered bitmap immediately. This avoids blanking the
   // viewer on every gesture and makes touch interactions compositor-friendly.
   function resizePages(next, focus){
-    const value=Math.max(.8,Math.min(3.5,next));
-    const ratio=value/zoom;
-    if(Math.abs(ratio-1)<.001)return;
+    // Always calculate from the original fit-width dimensions. Repeated
+    // rounding of already-resized canvases causes zoom drift on phones.
+    const value=Math.max(1,Math.min(3.5,next));
+    if(Math.abs(value-zoom)<.001)return;
     const rect=viewer.getBoundingClientRect();
     const point=focus||{x:rect.width/2,y:rect.height/2};
+    const oldZoom=zoom;
     const sx=viewer.scrollLeft+point.x,sy=viewer.scrollTop+point.y;
     zoom=value;
     holders.forEach(h=>{
       const c=h.querySelector('canvas');
-      if(c){
-        const w=parseFloat(c.style.width)||c.clientWidth;
-        const ht=parseFloat(c.style.height)||c.clientHeight;
-        c.style.width=Math.round(w*ratio)+'px';
-        c.style.height=Math.round(ht*ratio)+'px';
+      const base=baseCanvasSizes.get(h);
+      if(c && base){
+        c.style.width=Math.round(base.width*zoom)+'px';
+        c.style.height=Math.round(base.height*zoom)+'px';
       }
     });
     zoomLabel.textContent=Math.round(zoom*100)+'%';
-    if (pilot && zoom <= 1.001) {
-      // Returning to fit width must not preserve an old horizontal pan offset.
+    if(zoom<=1.001){
       viewer.scrollLeft=0;
+      // Do not move the document scroll position when returning to fit width.
     } else {
-      viewer.scrollLeft=Math.max(0,sx*ratio-point.x);
+      viewer.scrollLeft=Math.max(0,sx*(zoom/oldZoom)-point.x);
     }
-    viewer.scrollTop=Math.max(0,sy*ratio-point.y);
+    viewer.scrollTop=Math.max(0,sy*(zoom/oldZoom)-point.y);
   }
   // High-resolution replacement is deliberately delayed and restricted to
   // pages near the viewport. Never erase the old bitmap before replacement.

@@ -50,3 +50,11 @@
 @media(max-width:780px){
   .pdf-page canvas{margin-inline:auto;}
 }
+
+/* V8 pilot: allow scrolling to chain back to the main document at the
+   beginning/end of the PDF viewport, including after a pinch gesture. */
+@media(max-width:780px){
+  .pdf-series-viewer{overscroll-behavior-y:auto!important;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+  .pdf-page{width:100%;min-width:100%;}
+  .pdf-page canvas{margin-left:auto;margin-right:auto}
+}
