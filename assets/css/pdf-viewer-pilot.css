@@ -1,8 +1,31 @@
-/* PDF viewer mobile pilot: horizontal pan and lazy page placeholders */
+/* V4: responsive technical catalogue, keep desktop zoom controls */
 .pdf-series-viewer{overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;position:relative}
-.pdf-page{width:max-content;min-width:100%;max-width:none!important;margin:0 0 18px!important;text-align:left!important}
-.pdf-page-label{position:sticky;left:0;width:max-content;margin-bottom:8px}
+.pdf-page{width:max-content;min-width:100%;max-width:none!important;margin:0 0 12px!important;text-align:left!important}
+.pdf-page-label{position:sticky;left:0;width:max-content;margin-bottom:6px}
 .pdf-page canvas{max-width:none!important;display:block;image-rendering:auto}
-.pdf-placeholder{width:min(100%,650px);min-height:180px;padding:45px 16px;text-align:center;background:#fff;color:#60788c;border:1px solid #dce6ed}
+.pdf-placeholder{min-height:180px;padding:45px 12px;text-align:center;background:#fff;color:#60788c}
 .pdf-controls{position:sticky;top:0;z-index:2}
-@media(max-width:780px){.pdf-series-viewer{max-height:68vh}.pdf-controls{position:sticky;top:66px}.pdf-control{min-width:38px;min-height:38px}}
+@media(max-width:780px){
+  .pagehead{display:none}
+  .section:has(#detail){padding:8px 0 22px}
+  .section:has(#detail)>.wrap{padding-left:4px;padding-right:4px}
+  .crumb{margin:10px 8px 12px;font-size:11px}
+  .detail{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px;margin:8px 6px 14px;align-items:start}
+  .series-visual img{height:110px;object-fit:contain}
+  .series-visual-caption{display:none}
+  .series-info h2{font-size:23px;margin:4px 0}
+  .series-info .lead{font-size:12px;line-height:1.5;margin:5px 0}
+  .series-info .series-pages{display:none}
+  .series-info .tag{font-size:9px;padding:4px 5px}
+  .series-info .actions{margin-top:8px}
+  .series-info .btn{padding:6px 8px;font-size:11px}
+  .pdfbox{margin:8px 0 18px;padding:4px 2px;border-radius:5px}
+  .pdfbox h3{font-size:16px;margin:8px 6px}
+  .pdf-tip{display:none}
+  .pdf-controls{position:static;margin:3px 0 5px;padding:4px 6px;border:0;background:transparent}
+  .pdf-controls .pdf-control,.pdf-controls .pdf-zoom{display:none}
+  .pdf-status{font-size:11px}
+  .pdf-series-viewer{max-height:78vh;padding:1px;touch-action:pan-x pan-y;border-radius:2px}
+  .pdf-page{margin-bottom:8px!important}
+  .pdf-page-label{font-size:10px;padding:2px 3px}
+}

@@ -44,7 +44,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     const n=Number(holder.dataset.page);
     const page=await doc.getPage(n);
     if(token!==generation) return;
-    const baseWidth=Math.min(Math.max(viewer.clientWidth-28,240),950);
+    const baseWidth=Math.min(Math.max(viewer.clientWidth - (window.matchMedia('(max-width:780px)').matches ? 4 : 34),180),950);
     const viewport0=page.getViewport({scale:1});
     const displayScale=baseWidth/viewport0.width*zoom;
     const cssViewport=page.getViewport({scale:displayScale});
@@ -99,9 +99,35 @@ async function renderPages(x, viewer, status, zoomLabel) {
       holder.classList.remove('rendered');
       if(!holder.querySelector('.pdf-placeholder'))holder.append(element('div','pdf-placeholder','선명하게 다시 표시하는 중…'));
     }
-    // Preserve the user's horizontal position when zooming in.
+    // Re-render visible pages at the new resolution.
+    visible.add(holders[0]);
     requestAnimationFrame(()=>{schedule();});
   }
+
+  // Touch: native one-finger scrolling; two-finger pinch changes the PDF zoom.
+  // Avoid preventing native scrolling unless a two-finger gesture is active.
+  let pinchStart=null;
+  const distance=touches=>Math.hypot(touches[0].clientX-touches[1].clientX,touches[0].clientY-touches[1].clientY);
+  viewer.addEventListener('touchstart',e=>{
+    if(e.touches.length===2)pinchStart={distance:distance(e.touches),zoom};
+  },{passive:true});
+  viewer.addEventListener('touchmove',e=>{
+    if(!pinchStart||e.touches.length!==2)return;
+    e.preventDefault();
+    const next=Math.max(.8,Math.min(4,pinchStart.zoom*distance(e.touches)/pinchStart.distance));
+    zoomLabel.textContent=Math.round(next*100)+'%';
+    viewer.dataset.pinchZoom=String(next);
+  },{passive:false});
+  const finishPinch=()=>{
+    if(!pinchStart)return;
+    const next=Number(viewer.dataset.pinchZoom);
+    pinchStart=null;
+    delete viewer.dataset.pinchZoom;
+    if(Number.isFinite(next)&&next>0)updateZoom(next);
+    else zoomLabel.textContent=Math.round(zoom*100)+'%';
+  };
+  viewer.addEventListener('touchend',e=>{if(e.touches.length<2)finishPinch()},{passive:true});
+  viewer.addEventListener('touchcancel',finishPinch,{passive:true});
 
   // Render the first page before enabling lazy observation.
   await draw(holders[0],generation);
@@ -126,15 +152,15 @@ fetch('../data/products.json').then(r=>{if(!r.ok)throw Error('product data');ret
   const img=document.createElement('img');img.src='../'+(x.hero_image||x.image);img.alt=x.series+' 제조사 카탈로그 제품 이미지';
   img.onerror=()=>{if(x.hero_image)img.src='../'+x.image};
   visual.append(img,element('p','series-visual-caption','제조사 카탈로그 원본에서 발췌한 제품 이미지'));
-  const info=element('div');info.append(element('span','tag',x.maker+' / '+x.category),element('h2','',x.series),element('p','lead',x.name),element('p','lead','원본 카탈로그 '+x.start+'–'+x.end+'페이지'));
+  const info=element('div','series-info');info.append(element('span','tag',x.maker+' / '+x.category),element('h2','',x.series),element('p','lead',x.name),element('p','lead series-pages','원본 카탈로그 '+x.start+'–'+x.end+'페이지'));
   const actions=element('div','actions');const back=element('a','btn light','← 제품 목록으로 돌아가기');back.href='index.html?maker='+encodeURIComponent(x.maker);actions.append(back);info.append(actions);section.append(visual,info);
   const pdf=element('section','pdfbox');pdf.append(element('h3','','제품 기술자료 · '+x.series));
-  const tip=element('p','lead',x.series_pdf?'이 Series의 기술자료만 별도 PDF로 불러옵니다. 제조사 원본 카탈로그는 그대로 보존합니다.':'제조사 원본 PDF에서 이 Series에 해당하는 페이지만 표시합니다. 원본 파일은 변경하지 않습니다.');pdf.append(tip);
+  const tip=element('p','lead pdf-tip',x.series_pdf?'해당 Series의 기술자료를 표시합니다.':'제조사 원본 카탈로그의 해당 페이지를 표시합니다.');pdf.append(tip);
   const controls=element('div','pdf-controls');const status=element('span','pdf-status','기술자료를 불러오는 중…');
   const zoomOut=element('button','pdf-control','−');zoomOut.type='button';zoomOut.setAttribute('aria-label','축소');
   const zoomLabel=element('span','pdf-zoom','100%');const reset=element('button','pdf-control','100%');reset.type='button';reset.setAttribute('aria-label','원래 크기');const zoomIn=element('button','pdf-control','+');zoomIn.type='button';zoomIn.setAttribute('aria-label','확대');
   controls.append(status,zoomOut,zoomLabel,zoomIn,reset);pdf.append(controls);
-  const viewer=element('div','pdf-series-viewer');pdf.append(viewer);box.replaceChildren(section,pdf);
+  const viewer=element('div','pdf-series-viewer');viewer.setAttribute('aria-label','PDF 기술자료. 모바일에서 두 손가락으로 확대 축소할 수 있습니다.');pdf.append(viewer);box.replaceChildren(section,pdf);
   try{const api=await renderPages(x,viewer,status,zoomLabel);zoomIn.onclick=api.zoomIn;zoomOut.onclick=api.zoomOut;reset.onclick=api.reset}
   catch(e){status.textContent='기술자료를 표시하지 못했습니다.';viewer.replaceChildren(element('p','notice','PDF 표시 라이브러리 또는 네트워크 연결을 확인해 주세요.'));console.error(e)}
   if(x.note)box.append(element('p','notice',x.note));
