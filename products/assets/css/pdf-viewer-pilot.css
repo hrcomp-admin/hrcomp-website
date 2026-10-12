@@ -1,0 +1,71 @@
+/* V4: responsive technical catalogue, keep desktop zoom controls */
+.pdf-series-viewer{overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;position:relative}
+.pdf-page{width:max-content;min-width:100%;max-width:none!important;margin:0 0 12px!important;text-align:left!important}
+.pdf-page-label{position:sticky;left:0;width:max-content;margin-bottom:6px}
+.pdf-page canvas{max-width:none!important;display:block;image-rendering:auto}
+.pdf-placeholder{min-height:180px;padding:45px 12px;text-align:center;background:#fff;color:#60788c}
+.pdf-controls{position:sticky;top:0;z-index:2}
+@media(max-width:780px){
+  .pagehead{display:none}
+  .section:has(#detail){padding:8px 0 22px}
+  .section:has(#detail)>.wrap{padding-left:4px;padding-right:4px}
+  .crumb{margin:10px 8px 12px;font-size:11px}
+  .detail{display:grid;grid-template-columns:110px minmax(0,1fr);gap:10px;margin:8px 6px 14px;align-items:start}
+  .series-visual img{height:110px;object-fit:contain}
+  .series-visual-caption{display:none}
+  .series-info h2{font-size:23px;margin:4px 0}
+  .series-info .lead{font-size:12px;line-height:1.5;margin:5px 0}
+  .series-info .series-pages{display:none}
+  .series-info .tag{font-size:9px;padding:4px 5px}
+  .series-info .actions{margin-top:8px}
+  .series-info .btn{padding:6px 8px;font-size:11px}
+  .pdfbox{margin:8px 0 18px;padding:4px 2px;border-radius:5px}
+  .pdfbox h3{font-size:16px;margin:8px 6px}
+  .pdf-tip{display:none}
+  .pdf-controls{position:static;margin:3px 0 5px;padding:4px 6px;border:0;background:transparent}
+  .pdf-controls .pdf-control,.pdf-controls .pdf-zoom{display:none}
+  .pdf-status{font-size:11px}
+  .pdf-series-viewer{max-height:78vh;padding:1px;touch-action:pan-x pan-y;border-radius:2px}
+  .pdf-page{margin-bottom:8px!important}
+  .pdf-page-label{font-size:10px;padding:2px 3px}
+}
+
+/* V5 DPF-T/S mobile pilot */
+@media(max-width:780px){
+  .section:has(#detail)>.wrap{padding-left:7px;padding-right:7px}
+  .detail{grid-template-columns:108px minmax(0,1fr);gap:12px;margin:7px 6px 13px}
+  .series-info h2{margin:2px 0 5px;line-height:1.16}
+  .series-info .lead{margin:4px 0;line-height:1.45}
+  .series-info .actions{margin-top:9px}
+  .pdf-series-viewer{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
+  .pdf-series-viewer.is-pinching canvas{will-change:transform}
+}
+
+/* V6: keep page bitmap while pinching and reduce paint overhead */
+.pdf-series-viewer{contain:layout paint;scrollbar-width:thin}
+.pdf-page canvas{transform:translateZ(0);backface-visibility:hidden}
+@media(max-width:780px){.pdf-series-viewer{touch-action:pan-x pan-y;overscroll-behavior:contain}}
+
+/* V7 sample: center fit-width canvases without affecting zoomed horizontal panning. */
+@media(max-width:780px){
+  .pdf-page canvas{margin-inline:auto;}
+}
+
+/* V8 pilot: allow scrolling to chain back to the main document at the
+   beginning/end of the PDF viewport, including after a pinch gesture. */
+@media(max-width:780px){
+  .pdf-series-viewer{overscroll-behavior-y:auto!important;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+  .pdf-page{width:100%;min-width:100%;}
+  .pdf-page canvas{margin-left:auto;margin-right:auto}
+}
+
+/* V9: avoid forcing PDF canvases into stale GPU raster tiles on Android. */
+.pdf-page canvas{transform:none!important;backface-visibility:visible!important;will-change:auto!important}
+
+/* CSS diagnostic: disable isolated paint/compositing hints on mobile.
+   Preserve layout, centering and scroll rules. */
+@media (max-width:780px){
+  .pdf-series-viewer{contain:none!important;}
+  .pdf-series-viewer.is-pinching canvas{will-change:auto!important;}
+  .pdf-page canvas{transform:none!important;backface-visibility:visible!important;will-change:auto!important;}
+}
