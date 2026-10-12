@@ -1,0 +1,33 @@
+/* HR COMP V1: consistent product-led cards and detail hero, all 39 entries.
+   No PDF canvas, pinch, scroll, or compositing rules are changed here. */
+.product-card-v1{display:flex;flex-direction:column;min-width:0}
+.product-card-v1 .body{display:flex;flex:1;flex-direction:column;padding:17px 19px 21px}
+.product-card-v1 .body h3{font-size:22px;margin:11px 0 5px;overflow-wrap:anywhere}
+.product-card-v1 .body p{margin:0 0 14px;font-size:13px}
+.product-card-v1 .body b{margin-top:auto}
+.series-card-visual{height:190px;width:100%;position:relative;overflow:hidden;background:#eaf3f8}
+/* SANHUA's existing 1489x537 introduction artwork has a real product photo
+   on its right. Show that area, not the full page's tiny printed text. */
+.sanhua-product{background-image:var(--series-photo);background-size:auto 185%;background-position:90% center;background-repeat:no-repeat;background-color:#103d61}
+.highly-identity,.highly-visual{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;color:#fff;background:linear-gradient(140deg,#0e3452,#18769e)}
+.identity-maker{font-size:26px;font-weight:800;letter-spacing:.08em}
+.identity-symbol{font-size:38px;line-height:1;color:#9bd9ef}
+.identity-sub{font-size:10px;font-weight:700;letter-spacing:.22em;color:#c5e8f5}
+.series-visual.sanhua-visual{background:#eaf3f8}
+.series-detail-photo{height:235px;background-image:var(--series-photo);background-size:auto 175%;background-position:90% center;background-repeat:no-repeat;background-color:#103d61}
+.series-visual.highly-visual{min-height:250px;padding-top:30px}
+.series-visual.highly-visual .series-visual-caption{color:#d5ebf4;margin-top:20px}
+@media(max-width:780px){
+ .product-card-v1{flex-direction:row;align-items:stretch;min-height:145px}
+ .product-card-v1 .series-card-visual{width:39%;height:auto;min-height:145px;flex-shrink:0}
+ .product-card-v1 .sanhua-product{background-size:auto 170%;background-position:89% center}
+ .product-card-v1 .body{padding:13px 12px;justify-content:center;min-width:0}
+ .product-card-v1 .body .tag{font-size:9px;align-self:flex-start;padding:4px 6px}
+ .product-card-v1 .body h3{font-size:19px;margin:7px 0 3px}
+ .product-card-v1 .body p{font-size:12px;line-height:1.5;margin:0 0 9px}
+ .product-card-v1 .body b{font-size:11px;margin-top:0}
+ .product-card-v1 .identity-maker{font-size:17px}
+ .product-card-v1 .identity-symbol{font-size:27px}
+ .product-card-v1 .identity-sub{font-size:7px;letter-spacing:.1em}
+ .series-detail-photo{height:200px;background-size:auto 165%}
+}

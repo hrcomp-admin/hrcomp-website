@@ -212,9 +212,17 @@ fetch('../data/products.json').then(r=>{if(!r.ok)throw Error('product data');ret
   document.querySelector('#breadcrumb').textContent=x.maker+' / '+x.category+' / '+x.series;
   const section=element('div','detail');
   const visual=element('div','series-visual');
-  const img=document.createElement('img');img.src='../'+(x.hero_image||x.image);img.alt=x.series+' 제조사 카탈로그 제품 이미지';
-  img.onerror=()=>{if(x.hero_image)img.src='../'+x.image};
-  visual.append(img,element('p','series-visual-caption','제조사 카탈로그 원본에서 발췌한 제품 이미지'));
+  if(x.maker==='HIGHLY'){
+    visual.classList.add('highly-visual');
+    visual.append(element('span','identity-maker','HIGHLY'),element('span','identity-symbol','◉'),element('span','identity-sub','COMPRESSOR SERIES'));
+    visual.append(element('p','series-visual-caption','제품별 대표사진은 확인 후 반영 예정'));
+  }else{
+    visual.classList.add('sanhua-visual');
+    const photo=element('div','series-detail-photo');
+    photo.style.setProperty('--series-photo',`url("${encodeURI('../'+(x.hero_image||x.image))}")`);
+    photo.setAttribute('role','img');photo.setAttribute('aria-label',x.series+' 제품 이미지');
+    visual.append(photo,element('p','series-visual-caption','제조사 카탈로그의 제품 이미지 영역'));
+  }
   const info=element('div','series-info');info.append(element('span','tag',x.maker+' / '+x.category),element('h2','',x.series),element('p','lead',x.name),element('p','lead series-pages','원본 카탈로그 '+x.start+'–'+x.end+'페이지'));
   const actions=element('div','actions');const back=element('a','btn light','← 제품 목록으로 돌아가기');back.href='index.html?maker='+encodeURIComponent(x.maker);actions.append(back);info.append(actions);section.append(visual,info);
   const pdf=element('section','pdfbox');pdf.append(element('h3','','제품 기술자료 · '+x.series));
