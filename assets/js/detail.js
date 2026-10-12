@@ -97,7 +97,14 @@ async function renderPages(x, viewer, status, zoomLabel) {
         catch(err) { console.error('PDF page render error',err); const note=target.querySelector('.pdf-placeholder');if(note)note.textContent='페이지를 표시하지 못했습니다.';rendered.set(target,token); }
         finally {pending.delete(target);}
       }
-    } finally {active=false;}
+    } finally {
+      active=false;
+      // A zoom may invalidate an in-flight render. The earlier schedule()
+      // returns while active=true, so explicitly restart the queue here.
+      if(!isPinching && holders.some(h=>visible.has(h) && rendered.get(h)!==generation && !pending.has(h))) {
+        queueMicrotask(schedule);
+      }
+    }
   }
 
   // Resize the already rendered bitmap immediately. This avoids blanking the
@@ -138,7 +145,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
       generation++;
       rendered.clear();
       schedule();
-    },420);
+    },180);
   }
   function updateZoom(next,focus){resizePages(next,focus);if(pilot && zoom<=1.001)viewer.scrollLeft=0;sharpen();}
 
@@ -150,8 +157,10 @@ async function renderPages(x, viewer, status, zoomLabel) {
       if(zoom<=1.001 || isPinching) return;
       clearTimeout(panTimer);
       panTimer=setTimeout(()=>{
-        if(!isPinching && zoom>1.001) sharpen();
-      },240);
+        // Moving horizontally must also retry any zoom render that was
+        // invalidated while the previous canvas was still drawing.
+        if(!isPinching && zoom>1.001) schedule();
+      },180);
     },{passive:true});
   }
 
