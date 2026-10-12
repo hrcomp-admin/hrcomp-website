@@ -1,0 +1,48 @@
+HR COMP 홈페이지 V1 전체 Series 적용 후보본
+
+적용: 기존 두 Series의 PDF 뷰어 동작을 전체 39개에 적용, CSS 정상판 유지.
+총 39개(SANHUA 34, HIGHLY 5), 각각 독립 PDF 제공.
+4페이지 초과 문서는 모바일 메모리 보호를 위해 화면 근처 페이지부터 순차 렌더링.
+자동 검증: 39개 PDF 발췌 범위 및 텍스트 앞부분 원본 일치.
+미검증: 제품명/카테고리/문구/이미지와 제조사 내용의 의미적 일치, 모바일 실기기 조작.
+기존 배포본 백업 후 ZIP 전체 내용 업로드하여 시험하세요.
+
+s-1 | SANHUA | DPF-T/S | 원본 PDF 6-8 | 발췌 3쪽 | 페이지 일치
+s-2 | SANHUA | DPF(O) | 원본 PDF 9-11 | 발췌 3쪽 | 페이지 일치
+s-3 | SANHUA | PEV | 원본 PDF 12-15 | 발췌 4쪽 | 페이지 일치
+s-4 | SANHUA | VPF | 원본 PDF 16-22 | 발췌 7쪽 | 페이지 일치
+s-5 | SANHUA | SEC | 원본 PDF 23-25 | 발췌 3쪽 | 페이지 일치
+s-6 | SANHUA | VSD | 원본 PDF 26-27 | 발췌 2쪽 | 페이지 일치
+s-7 | SANHUA | 판형 열교환기 | 원본 PDF 28-29 | 발췌 2쪽 | 페이지 일치
+s-8 | SANHUA | MDF | 원본 PDF 30-32 | 발췌 3쪽 | 페이지 일치
+s-9 | SANHUA | FDF | 원본 PDF 33-36 | 발췌 4쪽 | 페이지 일치
+s-10 | SANHUA | LDF | 원본 PDF 37-39 | 발췌 3쪽 | 페이지 일치
+s-11 | SANHUA | KDF | 원본 PDF 40-43 | 발췌 4쪽 | 페이지 일치
+s-12 | SANHUA | RFKH | 원본 PDF 44-57 | 발췌 14쪽 | 페이지 일치
+s-13 | SANHUA | RFGB | 원본 PDF 58-64 | 발췌 7쪽 | 페이지 일치
+s-14 | SANHUA | RFGD | 원본 PDF 65-75 | 발췌 11쪽 | 페이지 일치
+s-15 | SANHUA | YCQB | 원본 PDF 76-77 | 발췌 2쪽 | 페이지 일치
+s-16 | SANHUA | YCQC | 원본 PDF 78-79 | 발췌 2쪽 | 페이지 일치
+s-17 | SANHUA | PSV | 원본 PDF 80-84 | 발췌 5쪽 | 페이지 일치
+s-18 | SANHUA | LTF | 원본 PDF 85-86 | 발췌 2쪽 | 페이지 일치
+s-19 | SANHUA | CTF | 원본 PDF 87-87 | 발췌 1쪽 | 페이지 일치
+s-20 | SANHUA | XTF | 원본 PDF 88-88 | 발췌 1쪽 | 페이지 일치
+s-21 | SANHUA | SHF-G | 원본 PDF 89-93 | 발췌 5쪽 | 페이지 일치
+s-22 | SANHUA | PSB-B | 원본 PDF 94-95 | 발췌 2쪽 | 페이지 일치
+s-23 | SANHUA | SSV/FSV | 원본 PDF 96-98 | 발췌 3쪽 | 페이지 일치
+s-24 | SANHUA | GSV | 원본 PDF 99-110 | 발췌 12쪽 | 페이지 일치
+s-25 | SANHUA | SBV | 원본 PDF 111-113 | 발췌 3쪽 | 페이지 일치
+s-26 | SANHUA | YCVS | 원본 PDF 114-116 | 발췌 3쪽 | 페이지 일치
+s-27 | SANHUA | CCV | 원본 PDF 117-118 | 발췌 2쪽 | 페이지 일치
+s-28 | SANHUA | SYJ | 원본 PDF 119-123 | 발췌 5쪽 | 페이지 일치
+s-29 | SANHUA | DTG | 원본 PDF 124-131 | 발췌 8쪽 | 페이지 일치
+s-30 | SANHUA | STG | 원본 PDF 132-139 | 발췌 8쪽 | 페이지 일치
+s-31 | SANHUA | HTG | 원본 PDF 140-148 | 발췌 9쪽 | 페이지 일치
+s-32 | SANHUA | P | 원본 PDF 149-150 | 발췌 2쪽 | 페이지 일치
+s-33 | SANHUA | YFQ-F | 원본 PDF 151-152 | 발췌 2쪽 | 페이지 일치
+s-34 | SANHUA | LRA-A/B/C | 원본 PDF 153-154 | 발췌 2쪽 | 페이지 일치
+h-1 | HIGHLY | 제품 Series 소개 | 원본 PDF 15-16 | 발췌 2쪽 | 페이지 일치
+h-2 | HIGHLY | 압축기 사양표 · 전반 | 원본 PDF 19-28 | 발췌 10쪽 | 페이지 일치
+h-3 | HIGHLY | 압축기 사양표 · 중반 | 원본 PDF 29-39 | 발췌 11쪽 | 페이지 일치
+h-4 | HIGHLY | 압축기 사양표 · 후반 | 원본 PDF 40-56 | 발췌 17쪽 | 페이지 일치
+h-5 | HIGHLY | 압축기 사양 및 참고자료 | 원본 PDF 57-59 | 발췌 3쪽 | 페이지 일치

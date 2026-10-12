@@ -24,7 +24,8 @@ async function renderPages(x, viewer, status, zoomLabel) {
     holders.push(holder);
   }
 
-  const pilot = x.series === 'DPF-T/S' || x.series === 'DPF(O)';
+  const pilot = Boolean(x.series_pdf);
+  const shortPdf = (end - start + 1) <= 4;
   const mobile = matchMedia('(max-width:780px)').matches;
   const perfStart=performance.now();
   let firstPaintDone=false;
@@ -91,7 +92,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     try {
       while(true) {
         const token=generation;
-        const target=holders.find(h=>(visible.has(h)||(pilot && mobile && zoom>1.001))&&rendered.get(h)!==token&&!pending.has(h));
+        const target=holders.find(h=>(visible.has(h)||(pilot && shortPdf && mobile && zoom>1.001))&&rendered.get(h)!==token&&!pending.has(h));
         if(!target)break;
         pending.add(target);
         try { await draw(target,token); }
@@ -102,7 +103,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
       active=false;
       // A zoom may invalidate an in-flight render. The earlier schedule()
       // returns while active=true, so explicitly restart the queue here.
-      if(!isPinching && holders.some(h=>(visible.has(h)||(pilot && mobile && zoom>1.001)) && rendered.get(h)!==generation && !pending.has(h))) {
+      if(!isPinching && holders.some(h=>(visible.has(h)||(pilot && shortPdf && mobile && zoom>1.001)) && rendered.get(h)!==generation && !pending.has(h))) {
         queueMicrotask(schedule);
       }
     }

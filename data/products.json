@@ -38,7 +38,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-3.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-3.webp"
+    "hero_image": "assets/images/series/s-3.webp",
+    "series_pdf": "catalog/series/s-3-pev.pdf"
   },
   {
     "id": "s-4",
@@ -51,7 +52,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-4.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-4.webp"
+    "hero_image": "assets/images/series/s-4.webp",
+    "series_pdf": "catalog/series/s-4-vpf.pdf"
   },
   {
     "id": "s-5",
@@ -64,7 +66,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-5.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-5.webp"
+    "hero_image": "assets/images/series/s-5.webp",
+    "series_pdf": "catalog/series/s-5-sec.pdf"
   },
   {
     "id": "s-6",
@@ -77,7 +80,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-6.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-6.webp"
+    "hero_image": "assets/images/series/s-6.webp",
+    "series_pdf": "catalog/series/s-6-vsd.pdf"
   },
   {
     "id": "s-7",
@@ -90,7 +94,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-7.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-7.webp"
+    "hero_image": "assets/images/series/s-7.webp",
+    "series_pdf": "catalog/series/s-7-series.pdf"
   },
   {
     "id": "s-8",
@@ -103,7 +108,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-8.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-8.webp"
+    "hero_image": "assets/images/series/s-8.webp",
+    "series_pdf": "catalog/series/s-8-mdf.pdf"
   },
   {
     "id": "s-9",
@@ -116,7 +122,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-9.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-9.webp"
+    "hero_image": "assets/images/series/s-9.webp",
+    "series_pdf": "catalog/series/s-9-fdf.pdf"
   },
   {
     "id": "s-10",
@@ -129,7 +136,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-10.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-10.webp"
+    "hero_image": "assets/images/series/s-10.webp",
+    "series_pdf": "catalog/series/s-10-ldf.pdf"
   },
   {
     "id": "s-11",
@@ -142,7 +150,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-11.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-11.webp"
+    "hero_image": "assets/images/series/s-11.webp",
+    "series_pdf": "catalog/series/s-11-kdf.pdf"
   },
   {
     "id": "s-12",
@@ -155,7 +164,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-12.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-12.webp"
+    "hero_image": "assets/images/series/s-12.webp",
+    "series_pdf": "catalog/series/s-12-rfkh.pdf"
   },
   {
     "id": "s-13",
@@ -168,7 +178,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-13.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-13.webp"
+    "hero_image": "assets/images/series/s-13.webp",
+    "series_pdf": "catalog/series/s-13-rfgb.pdf"
   },
   {
     "id": "s-14",
@@ -181,7 +192,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-14.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-14.webp"
+    "hero_image": "assets/images/series/s-14.webp",
+    "series_pdf": "catalog/series/s-14-rfgd.pdf"
   },
   {
     "id": "s-15",
@@ -194,7 +206,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-15.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-15.webp"
+    "hero_image": "assets/images/series/s-15.webp",
+    "series_pdf": "catalog/series/s-15-ycqb.pdf"
   },
   {
     "id": "s-16",
@@ -207,7 +220,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-16.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-16.webp"
+    "hero_image": "assets/images/series/s-16.webp",
+    "series_pdf": "catalog/series/s-16-ycqc.pdf"
   },
   {
     "id": "s-17",
@@ -220,7 +234,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-17.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-17.webp"
+    "hero_image": "assets/images/series/s-17.webp",
+    "series_pdf": "catalog/series/s-17-psv.pdf"
   },
   {
     "id": "s-18",
@@ -233,7 +248,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-18.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-18.webp"
+    "hero_image": "assets/images/series/s-18.webp",
+    "series_pdf": "catalog/series/s-18-ltf.pdf"
   },
   {
     "id": "s-19",
@@ -246,7 +262,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-19.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-19.webp"
+    "hero_image": "assets/images/series/s-19.webp",
+    "series_pdf": "catalog/series/s-19-ctf.pdf"
   },
   {
     "id": "s-20",
@@ -259,7 +276,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-20.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-20.webp"
+    "hero_image": "assets/images/series/s-20.webp",
+    "series_pdf": "catalog/series/s-20-xtf.pdf"
   },
   {
     "id": "s-21",
@@ -272,7 +290,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-21.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-21.webp"
+    "hero_image": "assets/images/series/s-21.webp",
+    "series_pdf": "catalog/series/s-21-shf-g.pdf"
   },
   {
     "id": "s-22",
@@ -285,7 +304,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-22.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-22.webp"
+    "hero_image": "assets/images/series/s-22.webp",
+    "series_pdf": "catalog/series/s-22-psb-b.pdf"
   },
   {
     "id": "s-23",
@@ -298,7 +318,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-23.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-23.webp"
+    "hero_image": "assets/images/series/s-23.webp",
+    "series_pdf": "catalog/series/s-23-ssv-fsv.pdf"
   },
   {
     "id": "s-24",
@@ -311,7 +332,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-24.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-24.webp"
+    "hero_image": "assets/images/series/s-24.webp",
+    "series_pdf": "catalog/series/s-24-gsv.pdf"
   },
   {
     "id": "s-25",
@@ -324,7 +346,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-25.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-25.webp"
+    "hero_image": "assets/images/series/s-25.webp",
+    "series_pdf": "catalog/series/s-25-sbv.pdf"
   },
   {
     "id": "s-26",
@@ -337,7 +360,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-26.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-26.webp"
+    "hero_image": "assets/images/series/s-26.webp",
+    "series_pdf": "catalog/series/s-26-ycvs.pdf"
   },
   {
     "id": "s-27",
@@ -350,7 +374,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-27.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-27.webp"
+    "hero_image": "assets/images/series/s-27.webp",
+    "series_pdf": "catalog/series/s-27-ccv.pdf"
   },
   {
     "id": "s-28",
@@ -363,7 +388,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-28.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-28.webp"
+    "hero_image": "assets/images/series/s-28.webp",
+    "series_pdf": "catalog/series/s-28-syj.pdf"
   },
   {
     "id": "s-29",
@@ -376,7 +402,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-29.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-29.webp"
+    "hero_image": "assets/images/series/s-29.webp",
+    "series_pdf": "catalog/series/s-29-dtg.pdf"
   },
   {
     "id": "s-30",
@@ -389,7 +416,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-30.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-30.webp"
+    "hero_image": "assets/images/series/s-30.webp",
+    "series_pdf": "catalog/series/s-30-stg.pdf"
   },
   {
     "id": "s-31",
@@ -402,7 +430,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-31.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-31.webp"
+    "hero_image": "assets/images/series/s-31.webp",
+    "series_pdf": "catalog/series/s-31-htg.pdf"
   },
   {
     "id": "s-32",
@@ -415,7 +444,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-32.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-32.webp"
+    "hero_image": "assets/images/series/s-32.webp",
+    "series_pdf": "catalog/series/s-32-p.pdf"
   },
   {
     "id": "s-33",
@@ -428,7 +458,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-33.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-33.webp"
+    "hero_image": "assets/images/series/s-33.webp",
+    "series_pdf": "catalog/series/s-33-yfq-f.pdf"
   },
   {
     "id": "s-34",
@@ -441,7 +472,8 @@
     "catalog": "catalog/sanhua-2024-ko.pdf",
     "image": "assets/images/sanhua/s-34.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
-    "hero_image": "assets/images/series/s-34.webp"
+    "hero_image": "assets/images/series/s-34.webp",
+    "series_pdf": "catalog/series/s-34-lra-a-b-c.pdf"
   },
   {
     "id": "h-1",
@@ -455,7 +487,8 @@
     "image": "assets/images/highly/h-1.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
     "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
-    "hero_image": "assets/images/series/h-1.webp"
+    "hero_image": "assets/images/series/h-1.webp",
+    "series_pdf": "catalog/series/h-1-series.pdf"
   },
   {
     "id": "h-2",
@@ -469,7 +502,8 @@
     "image": "assets/images/highly/h-2.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
     "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
-    "hero_image": "assets/images/series/h-2.webp"
+    "hero_image": "assets/images/series/h-2.webp",
+    "series_pdf": "catalog/series/h-2-series.pdf"
   },
   {
     "id": "h-3",
@@ -483,7 +517,8 @@
     "image": "assets/images/highly/h-3.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
     "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
-    "hero_image": "assets/images/series/h-3.webp"
+    "hero_image": "assets/images/series/h-3.webp",
+    "series_pdf": "catalog/series/h-3-series.pdf"
   },
   {
     "id": "h-4",
@@ -497,7 +532,8 @@
     "image": "assets/images/highly/h-4.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
     "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
-    "hero_image": "assets/images/series/h-4.webp"
+    "hero_image": "assets/images/series/h-4.webp",
+    "series_pdf": "catalog/series/h-4-series.pdf"
   },
   {
     "id": "h-5",
@@ -511,6 +547,7 @@
     "image": "assets/images/highly/h-5.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
     "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
-    "hero_image": "assets/images/series/h-5.webp"
+    "hero_image": "assets/images/series/h-5.webp",
+    "series_pdf": "catalog/series/h-5-series.pdf"
   }
 ]
