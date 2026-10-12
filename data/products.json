@@ -11,7 +11,8 @@
     "image": "assets/images/sanhua/s-1.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-1.webp",
-    "series_pdf": "catalog/series/s-1-dpf-ts.pdf"
+    "series_pdf": "catalog/series/s-1-dpf-ts.pdf",
+    "function": "냉매 유량을 정밀하게 조절하는 직동식 전자팽창밸브입니다."
   },
   {
     "id": "s-2",
@@ -25,7 +26,8 @@
     "image": "assets/images/sanhua/s-2.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-2.webp",
-    "series_pdf": "catalog/series/s-2-dpf-o.pdf"
+    "series_pdf": "catalog/series/s-2-dpf-o.pdf",
+    "function": "구동부를 통해 밸브 개도를 조절하여 냉매 흐름을 제어합니다."
   },
   {
     "id": "s-3",
@@ -39,7 +41,8 @@
     "image": "assets/images/sanhua/s-3.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-3.webp",
-    "series_pdf": "catalog/series/s-3-pev.pdf"
+    "series_pdf": "catalog/series/s-3-pev.pdf",
+    "function": "펄스 구동 방식으로 냉매 유량을 조절하는 팽창밸브입니다."
   },
   {
     "id": "s-4",
@@ -53,7 +56,8 @@
     "image": "assets/images/sanhua/s-4.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-4.webp",
-    "series_pdf": "catalog/series/s-4-vpf.pdf"
+    "series_pdf": "catalog/series/s-4-vpf.pdf",
+    "function": "대용량 냉동·공조 회로에서 냉매 유량을 조절합니다."
   },
   {
     "id": "s-5",
@@ -67,7 +71,8 @@
     "image": "assets/images/sanhua/s-5.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-5.webp",
-    "series_pdf": "catalog/series/s-5-sec.pdf"
+    "series_pdf": "catalog/series/s-5-sec.pdf",
+    "function": "전자팽창밸브의 개도와 운전을 제어하는 장치입니다."
   },
   {
     "id": "s-6",
@@ -81,7 +86,8 @@
     "image": "assets/images/sanhua/s-6.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-6.webp",
-    "series_pdf": "catalog/series/s-6-vsd.pdf"
+    "series_pdf": "catalog/series/s-6-vsd.pdf",
+    "function": "전자팽창밸브 구동 신호를 제공하는 드라이버입니다."
   },
   {
     "id": "s-7",
@@ -95,7 +101,8 @@
     "image": "assets/images/sanhua/s-7.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-7.webp",
-    "series_pdf": "catalog/series/s-7-series.pdf"
+    "series_pdf": "catalog/series/s-7-series.pdf",
+    "function": "두 유체 사이의 열을 전달하는 판형 열교환기입니다."
   },
   {
     "id": "s-8",
@@ -109,7 +116,8 @@
     "image": "assets/images/sanhua/s-8.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-8.webp",
-    "series_pdf": "catalog/series/s-8-mdf.pdf"
+    "series_pdf": "catalog/series/s-8-mdf.pdf",
+    "function": "전기 신호로 냉매 유로의 개폐를 제어합니다."
   },
   {
     "id": "s-9",
@@ -123,7 +131,8 @@
     "image": "assets/images/sanhua/s-9.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-9.webp",
-    "series_pdf": "catalog/series/s-9-fdf.pdf"
+    "series_pdf": "catalog/series/s-9-fdf.pdf",
+    "function": "냉동·공조 회로에서 전기 신호로 냉매 흐름을 개폐합니다."
   },
   {
     "id": "s-10",
@@ -137,7 +146,8 @@
     "image": "assets/images/sanhua/s-10.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-10.webp",
-    "series_pdf": "catalog/series/s-10-ldf.pdf"
+    "series_pdf": "catalog/series/s-10-ldf.pdf",
+    "function": "냉매 유로를 개폐하며 차단 시 누설량 저감을 고려한 전자변입니다."
   },
   {
     "id": "s-11",
@@ -151,7 +161,8 @@
     "image": "assets/images/sanhua/s-11.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-11.webp",
-    "series_pdf": "catalog/series/s-11-kdf.pdf"
+    "series_pdf": "catalog/series/s-11-kdf.pdf",
+    "function": "피스톤 작동 구조를 이용해 냉매 유로를 개폐합니다."
   },
   {
     "id": "s-12",
@@ -165,7 +176,8 @@
     "image": "assets/images/sanhua/s-12.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-12.webp",
-    "series_pdf": "catalog/series/s-12-rfkh.pdf"
+    "series_pdf": "catalog/series/s-12-rfkh.pdf",
+    "function": "감온 작동을 통해 증발기로 공급되는 냉매량을 조절합니다."
   },
   {
     "id": "s-13",
@@ -179,7 +191,8 @@
     "image": "assets/images/sanhua/s-13.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-13.webp",
-    "series_pdf": "catalog/series/s-13-rfgb.pdf"
+    "series_pdf": "catalog/series/s-13-rfgb.pdf",
+    "function": "온도 변화에 반응하여 냉매 공급량을 조절합니다."
   },
   {
     "id": "s-14",
@@ -193,7 +206,8 @@
     "image": "assets/images/sanhua/s-14.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-14.webp",
-    "series_pdf": "catalog/series/s-14-rfgd.pdf"
+    "series_pdf": "catalog/series/s-14-rfgd.pdf",
+    "function": "냉동·공조 시스템의 냉매 팽창과 유량 조절에 사용됩니다."
   },
   {
     "id": "s-15",
@@ -207,7 +221,8 @@
     "image": "assets/images/sanhua/s-15.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-15.webp",
-    "series_pdf": "catalog/series/s-15-ycqb.pdf"
+    "series_pdf": "catalog/series/s-15-ycqb.pdf",
+    "function": "냉매 회로의 압력을 감지해 제어 시스템에 전달합니다."
   },
   {
     "id": "s-16",
@@ -221,7 +236,8 @@
     "image": "assets/images/sanhua/s-16.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-16.webp",
-    "series_pdf": "catalog/series/s-16-ycqc.pdf"
+    "series_pdf": "catalog/series/s-16-ycqc.pdf",
+    "function": "시스템 압력을 측정하는 센서입니다."
   },
   {
     "id": "s-17",
@@ -235,7 +251,8 @@
     "image": "assets/images/sanhua/s-17.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-17.webp",
-    "series_pdf": "catalog/series/s-17-psv.pdf"
+    "series_pdf": "catalog/series/s-17-psv.pdf",
+    "function": "압력 상태에 따라 시스템의 운전 제어에 활용됩니다."
   },
   {
     "id": "s-18",
@@ -249,7 +266,8 @@
     "image": "assets/images/sanhua/s-18.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-18.webp",
-    "series_pdf": "catalog/series/s-18-ltf.pdf"
+    "series_pdf": "catalog/series/s-18-ltf.pdf",
+    "function": "응축 압력을 조절해 시스템 운전 조건을 관리합니다."
   },
   {
     "id": "s-19",
@@ -263,7 +281,8 @@
     "image": "assets/images/sanhua/s-19.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-19.webp",
-    "series_pdf": "catalog/series/s-19-ctf.pdf"
+    "series_pdf": "catalog/series/s-19-ctf.pdf",
+    "function": "증발 압력을 조절하는 밸브입니다."
   },
   {
     "id": "s-20",
@@ -277,7 +296,8 @@
     "image": "assets/images/sanhua/s-20.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-20.webp",
-    "series_pdf": "catalog/series/s-20-xtf.pdf"
+    "series_pdf": "catalog/series/s-20-xtf.pdf",
+    "function": "흡입측 압력을 조절하는 밸브입니다."
   },
   {
     "id": "s-21",
@@ -291,7 +311,8 @@
     "image": "assets/images/sanhua/s-21.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-21.webp",
-    "series_pdf": "catalog/series/s-21-shf-g.pdf"
+    "series_pdf": "catalog/series/s-21-shf-g.pdf",
+    "function": "냉매 흐름의 방향을 전환하는 사방변입니다."
   },
   {
     "id": "s-22",
@@ -305,7 +326,8 @@
     "image": "assets/images/sanhua/s-22.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-22.webp",
-    "series_pdf": "catalog/series/s-22-psb-b.pdf"
+    "series_pdf": "catalog/series/s-22-psb-b.pdf",
+    "function": "공조 장치에서 발생하는 응축수를 배출하는 펌프입니다."
   },
   {
     "id": "s-23",
@@ -319,7 +341,8 @@
     "image": "assets/images/sanhua/s-23.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-23.webp",
-    "series_pdf": "catalog/series/s-23-ssv-fsv.pdf"
+    "series_pdf": "catalog/series/s-23-ssv-fsv.pdf",
+    "function": "냉매 회로의 연결·차단 및 서비스 작업에 사용하는 밸브입니다."
   },
   {
     "id": "s-24",
@@ -333,7 +356,8 @@
     "image": "assets/images/sanhua/s-24.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-24.webp",
-    "series_pdf": "catalog/series/s-24-gsv.pdf"
+    "series_pdf": "catalog/series/s-24-gsv.pdf",
+    "function": "배관 내 유체 흐름을 차단하는 밸브입니다."
   },
   {
     "id": "s-25",
@@ -347,7 +371,8 @@
     "image": "assets/images/sanhua/s-25.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-25.webp",
-    "series_pdf": "catalog/series/s-25-sbv.pdf"
+    "series_pdf": "catalog/series/s-25-sbv.pdf",
+    "function": "회전식 볼 구조로 배관의 유로를 개폐합니다."
   },
   {
     "id": "s-26",
@@ -361,7 +386,8 @@
     "image": "assets/images/sanhua/s-26.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-26.webp",
-    "series_pdf": "catalog/series/s-26-ycvs.pdf"
+    "series_pdf": "catalog/series/s-26-ycvs.pdf",
+    "function": "냉매가 한 방향으로 흐르도록 하는 체크밸브입니다."
   },
   {
     "id": "s-27",
@@ -375,7 +401,8 @@
     "image": "assets/images/sanhua/s-27.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-27.webp",
-    "series_pdf": "catalog/series/s-27-ccv.pdf"
+    "series_pdf": "catalog/series/s-27-ccv.pdf",
+    "function": "배관 내 역류를 방지하는 체크밸브입니다."
   },
   {
     "id": "s-28",
@@ -389,7 +416,8 @@
     "image": "assets/images/sanhua/s-28.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-28.webp",
-    "series_pdf": "catalog/series/s-28-syj.pdf"
+    "series_pdf": "catalog/series/s-28-syj.pdf",
+    "function": "냉매 회로의 상태를 육안으로 확인하는 관찰창입니다."
   },
   {
     "id": "s-29",
@@ -403,7 +431,8 @@
     "image": "assets/images/sanhua/s-29.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-29.webp",
-    "series_pdf": "catalog/series/s-29-dtg.pdf"
+    "series_pdf": "catalog/series/s-29-dtg.pdf",
+    "function": "냉매 회로의 수분과 이물질을 제거하는 필터드라이어입니다."
   },
   {
     "id": "s-30",
@@ -417,7 +446,8 @@
     "image": "assets/images/sanhua/s-30.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-30.webp",
-    "series_pdf": "catalog/series/s-30-stg.pdf"
+    "series_pdf": "catalog/series/s-30-stg.pdf",
+    "function": "양방향 흐름을 고려해 수분과 이물질을 제거하는 필터드라이어입니다."
   },
   {
     "id": "s-31",
@@ -431,7 +461,8 @@
     "image": "assets/images/sanhua/s-31.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-31.webp",
-    "series_pdf": "catalog/series/s-31-htg.pdf"
+    "series_pdf": "catalog/series/s-31-htg.pdf",
+    "function": "내부 코어를 교체할 수 있는 필터드라이어입니다."
   },
   {
     "id": "s-32",
@@ -445,7 +476,8 @@
     "image": "assets/images/sanhua/s-32.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-32.webp",
-    "series_pdf": "catalog/series/s-32-p.pdf"
+    "series_pdf": "catalog/series/s-32-p.pdf",
+    "function": "압축기 흡입측으로 액냉매가 유입되는 것을 줄이는 장치입니다."
   },
   {
     "id": "s-33",
@@ -459,7 +491,8 @@
     "image": "assets/images/sanhua/s-33.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-33.webp",
-    "series_pdf": "catalog/series/s-33-yfq-f.pdf"
+    "series_pdf": "catalog/series/s-33-yfq-f.pdf",
+    "function": "냉매와 함께 순환하는 윤활유를 분리하는 장치입니다."
   },
   {
     "id": "s-34",
@@ -473,81 +506,67 @@
     "image": "assets/images/sanhua/s-34.webp",
     "source": "SANHUA 2024 한국어 종합 카탈로그 SUMMARY",
     "hero_image": "assets/images/series/s-34.webp",
-    "series_pdf": "catalog/series/s-34-lra-a-b-c.pdf"
+    "series_pdf": "catalog/series/s-34-lra-a-b-c.pdf",
+    "function": "냉매를 저장하고 회로 내 냉매량을 관리하는 수액기입니다."
   },
   {
     "id": "h-1",
     "maker": "HIGHLY",
-    "category": "제품군 안내",
-    "name": "제품 Series 소개",
-    "series": "제품 Series 소개",
-    "start": 15,
-    "end": 16,
+    "category": "Compressor",
+    "name": "전체 압축기 Series",
+    "series": "Compressor Series",
+    "start": 12,
+    "end": 15,
     "catalog": "catalog/highly-2026.pdf",
-    "image": "assets/images/highly/h-1.webp",
+    "image": "assets/images/highly/series.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
-    "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
-    "hero_image": "assets/images/series/h-1.webp",
-    "series_pdf": "catalog/series/h-1-series.pdf"
+    "hero_image": "assets/images/highly/series.webp",
+    "series_pdf": "catalog/series/h-1-series.pdf",
+    "function": "HIGHLY 압축기 제품군의 주요 Series를 한눈에 소개합니다."
   },
   {
     "id": "h-2",
     "maker": "HIGHLY",
-    "category": "모델별 사양",
-    "name": "압축기 사양표 · 전반",
-    "series": "압축기 사양표 · 전반",
-    "start": 19,
+    "category": "Compressor",
+    "name": "Room Air Conditioners",
+    "series": "RAC",
+    "start": 16,
     "end": 28,
     "catalog": "catalog/highly-2026.pdf",
-    "image": "assets/images/highly/h-2.webp",
+    "image": "assets/images/highly/rac.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
-    "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
-    "hero_image": "assets/images/series/h-2.webp",
-    "series_pdf": "catalog/series/h-2-series.pdf"
+    "hero_image": "assets/images/highly/rac.webp",
+    "series_pdf": "catalog/series/h-2-rac.pdf",
+    "function": "가정용 에어컨과 주거용 냉난방 분야에 적용되는 압축기 제품군입니다."
   },
   {
     "id": "h-3",
     "maker": "HIGHLY",
-    "category": "모델별 사양",
-    "name": "압축기 사양표 · 중반",
-    "series": "압축기 사양표 · 중반",
+    "category": "Compressor",
+    "name": "Light Commercial AC",
+    "series": "PAC",
     "start": 29,
-    "end": 39,
+    "end": 43,
     "catalog": "catalog/highly-2026.pdf",
-    "image": "assets/images/highly/h-3.webp",
+    "image": "assets/images/highly/pac.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
-    "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
-    "hero_image": "assets/images/series/h-3.webp",
-    "series_pdf": "catalog/series/h-3-series.pdf"
+    "hero_image": "assets/images/highly/pac.webp",
+    "series_pdf": "catalog/series/h-3-pac.pdf",
+    "function": "학교·상업시설·호텔 등 경상업용 냉난방 분야의 압축기 제품군입니다."
   },
   {
     "id": "h-4",
     "maker": "HIGHLY",
-    "category": "모델별 사양",
-    "name": "압축기 사양표 · 후반",
-    "series": "압축기 사양표 · 후반",
-    "start": 40,
+    "category": "Compressor",
+    "name": "Non-Residential AC",
+    "series": "NRAC",
+    "start": 44,
     "end": 56,
     "catalog": "catalog/highly-2026.pdf",
-    "image": "assets/images/highly/h-4.webp",
+    "image": "assets/images/highly/nrac.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
-    "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
-    "hero_image": "assets/images/series/h-4.webp",
-    "series_pdf": "catalog/series/h-4-series.pdf"
-  },
-  {
-    "id": "h-5",
-    "maker": "HIGHLY",
-    "category": "기술자료",
-    "name": "압축기 사양 및 참고자료",
-    "series": "압축기 사양 및 참고자료",
-    "start": 57,
-    "end": 59,
-    "catalog": "catalog/highly-2026.pdf",
-    "image": "assets/images/highly/h-5.webp",
-    "source": "HIGHLY 2026 Rotary Compressor Catalogue",
-    "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
-    "hero_image": "assets/images/series/h-5.webp",
-    "series_pdf": "catalog/series/h-5-series.pdf"
+    "hero_image": "assets/images/highly/nrac.webp",
+    "series_pdf": "catalog/series/h-4-nrac.pdf",
+    "function": "비주거용 냉난방 및 관련 설비 분야의 압축기 제품군입니다."
   }
 ]
