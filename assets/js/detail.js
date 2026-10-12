@@ -56,8 +56,8 @@ async function renderPages(x, viewer, status, zoomLabel) {
     const cssViewport=page.getViewport({scale:displayScale});
     // Cap backing pixels to avoid browser canvas limits on phones.
     // Mobile first paint: use a light canvas. Sharpen only after a deliberate zoom.
-    const dpr=mobile ? (zoom>1.45 ? Math.min(devicePixelRatio||1,1.65) : 1) : Math.min(devicePixelRatio||1,2);
-    const maxPixels=mobile ? 4200000 : 12000000;
+    const dpr=mobile ? (pilot ? Math.min(devicePixelRatio||1,1.7) : (zoom>1.45 ? Math.min(devicePixelRatio||1,1.65) : 1)) : Math.min(devicePixelRatio||1,2);
+    const maxPixels=mobile ? (pilot ? 5500000 : 4200000) : 12000000;
     const pixelFactor=Math.min(dpr,Math.sqrt(maxPixels/(cssViewport.width*cssViewport.height)));
     const viewport=page.getViewport({scale:displayScale*pixelFactor});
     const canvas=document.createElement('canvas');
@@ -73,6 +73,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     const placeholder=holder.querySelector('.pdf-placeholder');
     if(placeholder)placeholder.remove();
     holder.append(canvas);
+    if (pilot && zoom <= 1.001) viewer.scrollLeft = 0;
     holder.style.minHeight='';
     holder.style.minWidth='';
     if(!firstPaintDone){firstPaintDone=true;console.info('[HR COMP V6] first PDF page rendered in',Math.round(performance.now()-perfStart),'ms (excluding library/document loading)');}
@@ -116,7 +117,12 @@ async function renderPages(x, viewer, status, zoomLabel) {
       }
     });
     zoomLabel.textContent=Math.round(zoom*100)+'%';
-    viewer.scrollLeft=Math.max(0,sx*ratio-point.x);
+    if (pilot && zoom <= 1.001) {
+      // Returning to fit width must not preserve an old horizontal pan offset.
+      viewer.scrollLeft=0;
+    } else {
+      viewer.scrollLeft=Math.max(0,sx*ratio-point.x);
+    }
     viewer.scrollTop=Math.max(0,sy*ratio-point.y);
   }
   // High-resolution replacement is deliberately delayed and restricted to
@@ -130,7 +136,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
       schedule();
     },420);
   }
-  function updateZoom(next,focus){resizePages(next,focus);sharpen();}
+  function updateZoom(next,focus){resizePages(next,focus);if(pilot && zoom<=1.001)viewer.scrollLeft=0;sharpen();}
 
   let pinch=null;
   const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
@@ -152,6 +158,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     if(!pinch)return;
     pinch=null;
     isPinching=false;
+    if (pilot && zoom <= 1.001) viewer.scrollLeft=0;
     sharpen();
   };
   viewer.addEventListener('touchend',e=>{if(e.touches.length<2)finishPinch()},{passive:true});
