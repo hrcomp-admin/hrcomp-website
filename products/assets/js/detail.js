@@ -24,7 +24,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     holders.push(holder);
   }
 
-  const pilot = Boolean(x.series_pdf);
+  const pilot = true; // All Series use the verified sample PDF viewer path.
   const shortPdf = (end - start + 1) <= 4;
   const mobile = matchMedia('(max-width:780px)').matches;
   const perfStart=performance.now();
@@ -60,8 +60,8 @@ async function renderPages(x, viewer, status, zoomLabel) {
     const cssViewport=page.getViewport({scale:displayScale});
     // Cap backing pixels to avoid browser canvas limits on phones.
     // Mobile first paint: use a light canvas. Sharpen only after a deliberate zoom.
-    const dpr=mobile ? (pilot ? Math.min(devicePixelRatio||1,1.7) : (zoom>1.45 ? Math.min(devicePixelRatio||1,1.65) : 1)) : Math.min(devicePixelRatio||1,2);
-    const maxPixels=mobile ? (pilot ? 10500000 : 4200000) : 12000000;
+    const dpr=mobile ? Math.min(devicePixelRatio||1,1.7) : Math.min(devicePixelRatio||1,2);
+    const maxPixels=mobile ? 10500000 : 12000000;
     const pixelFactor=Math.min(dpr,Math.sqrt(maxPixels/(cssViewport.width*cssViewport.height)));
     const viewport=page.getViewport({scale:displayScale*pixelFactor});
     const canvas=document.createElement('canvas');
@@ -78,7 +78,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     const placeholder=holder.querySelector('.pdf-placeholder');
     if(placeholder)placeholder.remove();
     holder.append(canvas);
-    if (pilot && zoom <= 1.001) viewer.scrollLeft = 0;
+    if (zoom <= 1.001) viewer.scrollLeft = 0;
     holder.style.minHeight='';
     holder.style.minWidth='';
     if(!firstPaintDone){firstPaintDone=true;console.info('[HR COMP V6] first PDF page rendered in',Math.round(performance.now()-perfStart),'ms (excluding library/document loading)');}
@@ -92,7 +92,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     try {
       while(true) {
         const token=generation;
-        const target=holders.find(h=>(visible.has(h)||(pilot && shortPdf && mobile && zoom>1.001))&&rendered.get(h)!==token&&!pending.has(h));
+        const target=holders.find(h=>(visible.has(h)||(shortPdf && mobile))&&rendered.get(h)!==token&&!pending.has(h));
         if(!target)break;
         pending.add(target);
         try { await draw(target,token); }
@@ -103,7 +103,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
       active=false;
       // A zoom may invalidate an in-flight render. The earlier schedule()
       // returns while active=true, so explicitly restart the queue here.
-      if(!isPinching && holders.some(h=>(visible.has(h)||(pilot && shortPdf && mobile && zoom>1.001)) && rendered.get(h)!==generation && !pending.has(h))) {
+      if(!isPinching && holders.some(h=>(visible.has(h)||(shortPdf && mobile)) && rendered.get(h)!==generation && !pending.has(h))) {
         queueMicrotask(schedule);
       }
     }
@@ -149,12 +149,12 @@ async function renderPages(x, viewer, status, zoomLabel) {
       schedule();
     },180);
   }
-  function updateZoom(next,focus){resizePages(next,focus);if(pilot && zoom<=1.001)viewer.scrollLeft=0;sharpen();}
+  function updateZoom(next,focus){resizePages(next,focus);if(zoom<=1.001)viewer.scrollLeft=0;sharpen();}
 
   // Some Android WebViews retain a low-resolution composited tile after
   // horizontal panning. Refresh the visible page after the gesture settles.
   // Keep the existing bitmap on screen until its replacement is ready.
-  if(pilot && mobile){
+  if(mobile){
     viewer.addEventListener('scroll',()=>{
       if(zoom<=1.001 || isPinching) return;
       clearTimeout(panTimer);
@@ -186,7 +186,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     if(!pinch)return;
     pinch=null;
     isPinching=false;
-    if (pilot && zoom <= 1.001) viewer.scrollLeft=0;
+    if (zoom <= 1.001) viewer.scrollLeft=0;
     sharpen();
   };
   viewer.addEventListener('touchend',e=>{if(e.touches.length<2)finishPinch()},{passive:true});

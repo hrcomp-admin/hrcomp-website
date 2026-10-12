@@ -520,7 +520,6 @@
     "catalog": "catalog/highly-2026.pdf",
     "image": "assets/images/highly/series.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
-    "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
     "hero_image": "assets/images/highly/series.webp",
     "series_pdf": "catalog/series/h-1-series.pdf",
     "function": "HIGHLY 압축기 제품군의 주요 Series를 한눈에 소개합니다."
@@ -536,7 +535,6 @@
     "catalog": "catalog/highly-2026.pdf",
     "image": "assets/images/highly/rac.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
-    "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
     "hero_image": "assets/images/highly/rac.webp",
     "series_pdf": "catalog/series/h-2-rac.pdf",
     "function": "가정용 에어컨과 주거용 냉난방 분야에 적용되는 압축기 제품군입니다."
@@ -552,7 +550,6 @@
     "catalog": "catalog/highly-2026.pdf",
     "image": "assets/images/highly/pac.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
-    "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
     "hero_image": "assets/images/highly/pac.webp",
     "series_pdf": "catalog/series/h-3-pac.pdf",
     "function": "학교·상업시설·호텔 등 경상업용 냉난방 분야의 압축기 제품군입니다."
@@ -568,7 +565,6 @@
     "catalog": "catalog/highly-2026.pdf",
     "image": "assets/images/highly/nrac.webp",
     "source": "HIGHLY 2026 Rotary Compressor Catalogue",
-    "note": "HIGHLY 상세 Series별 페이지 경계는 원본 검토 후 추가 세분화 예정",
     "hero_image": "assets/images/highly/nrac.webp",
     "series_pdf": "catalog/series/h-4-nrac.pdf",
     "function": "비주거용 냉난방 및 관련 설비 분야의 압축기 제품군입니다."

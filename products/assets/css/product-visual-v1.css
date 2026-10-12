@@ -47,3 +47,7 @@
  .product-function{font-size:12px;line-height:1.5}
  .product-card-function{font-size:11px!important}
 }
+
+/* V1 CM: keep the product image left and functional description right on all screen sizes. */
+@media(min-width:781px){.detail{display:grid;grid-template-columns:minmax(220px,34%) minmax(0,1fr);align-items:start;gap:24px}}
+@media(max-width:780px){.series-info .product-function{display:block!important;color:#23495e!important}.series-visual.product-photo-visual{min-width:0}}
