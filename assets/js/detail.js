@@ -34,6 +34,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
   let active=false;
   let isPinching=false;
   let settleTimer=null;
+  let panTimer=null;
   const rendered=new Map();
   const pending=new Set();
   const visible=new Set();
@@ -58,7 +59,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     // Cap backing pixels to avoid browser canvas limits on phones.
     // Mobile first paint: use a light canvas. Sharpen only after a deliberate zoom.
     const dpr=mobile ? (pilot ? Math.min(devicePixelRatio||1,1.7) : (zoom>1.45 ? Math.min(devicePixelRatio||1,1.65) : 1)) : Math.min(devicePixelRatio||1,2);
-    const maxPixels=mobile ? (pilot ? 5500000 : 4200000) : 12000000;
+    const maxPixels=mobile ? (pilot ? 10500000 : 4200000) : 12000000;
     const pixelFactor=Math.min(dpr,Math.sqrt(maxPixels/(cssViewport.width*cssViewport.height)));
     const viewport=page.getViewport({scale:displayScale*pixelFactor});
     const canvas=document.createElement('canvas');
@@ -140,6 +141,19 @@ async function renderPages(x, viewer, status, zoomLabel) {
     },420);
   }
   function updateZoom(next,focus){resizePages(next,focus);if(pilot && zoom<=1.001)viewer.scrollLeft=0;sharpen();}
+
+  // Some Android WebViews retain a low-resolution composited tile after
+  // horizontal panning. Refresh the visible page after the gesture settles.
+  // Keep the existing bitmap on screen until its replacement is ready.
+  if(pilot && mobile){
+    viewer.addEventListener('scroll',()=>{
+      if(zoom<=1.001 || isPinching) return;
+      clearTimeout(panTimer);
+      panTimer=setTimeout(()=>{
+        if(!isPinching && zoom>1.001) sharpen();
+      },240);
+    },{passive:true});
+  }
 
   let pinch=null;
   const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);

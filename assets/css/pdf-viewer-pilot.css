@@ -58,3 +58,6 @@
   .pdf-page{width:100%;min-width:100%;}
   .pdf-page canvas{margin-left:auto;margin-right:auto}
 }
+
+/* V9: avoid forcing PDF canvases into stale GPU raster tiles on Android. */
+.pdf-page canvas{transform:none!important;backface-visibility:visible!important;will-change:auto!important}
