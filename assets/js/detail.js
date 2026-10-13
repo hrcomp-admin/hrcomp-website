@@ -227,6 +227,30 @@ fetch('../data/products.json?v=cm20261012b').then(r=>{if(!r.ok)throw Error('prod
   }
   info.append(element('p','lead series-pages','원본 카탈로그 '+x.start+'–'+x.end+'페이지'));
   const actions=element('div','actions');const back=element('a','btn light','← 제품 목록으로 돌아가기');back.href='index.html?maker='+encodeURIComponent(x.maker);actions.append(back);info.append(actions);section.append(visual,info);
+  // HIGHLY Compressor Series (h-1): same static-image presentation as COMPANY.
+  // Other product series continue using their original PDF.js viewer unchanged.
+  if(x.id==='h-1'){
+    const imageBox=element('section','pdfbox highly-series-images');
+    imageBox.append(element('h3','','제품 기술자료 · '+x.series));
+    imageBox.append(element('p','lead','원본 카탈로그 12–15페이지 (4페이지)'));
+    const imageRoot=location.pathname.includes('/products/products/')?'../../assets/img/series/':'../assets/img/series/';
+    for(let i=1;i<=4;i++){
+      const page=element('div','highly-series-image-page');
+      page.style.cssText='margin:0 auto 12px;max-width:100%;background:#fff';
+      const img=element('img','highly-series-page-image');
+      img.src=imageRoot+'h-1-'+String(i).padStart(2,'0')+'.webp';
+      img.alt='HIGHLY Compressor Series 원본 카탈로그 '+(i+11)+'페이지';
+      img.width=2000;img.height=2845;
+      img.loading=i===1?'eager':'lazy';
+      img.decoding='async';
+      img.style.cssText='display:block;width:100%;height:auto;max-width:100%';
+      if(i===1)img.fetchPriority='high';
+      page.append(img);imageBox.append(page);
+    }
+    box.replaceChildren(section,imageBox);
+    if(x.note)box.append(element('p','notice',x.note));
+    return;
+  }
   const pdf=element('section','pdfbox');pdf.append(element('h3','','제품 기술자료 · '+x.series));
   const tip=element('p','lead pdf-tip',x.series_pdf?'해당 Series의 기술자료를 표시합니다.':'제조사 원본 카탈로그의 해당 페이지를 표시합니다.');pdf.append(tip);
   const controls=element('div','pdf-controls');const status=element('span','pdf-status','기술자료를 불러오는 중…');
