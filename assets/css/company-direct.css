@@ -1,0 +1,10 @@
+/* Company navigation only. Does not modify the product PDF.js viewer. */
+.company-direct-card{color:inherit;text-decoration:none;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.company-direct-card:hover,.company-direct-card:focus-visible{border-color:#1475aa;box-shadow:0 4px 18px rgba(0,68,110,.12);outline-offset:3px}
+.company-direct-action{align-self:flex-start;margin-top:auto;display:inline-block;border-radius:6px;background:#16699d;color:#fff;padding:11px 15px;font-weight:700;font-size:13px}
+.company-pdf-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:13px 0}
+.company-back{display:inline-flex;align-items:center;gap:7px;padding:11px 15px;border-radius:8px;background:#176b9c;color:#fff;text-decoration:none;font-weight:700}
+.company-back:hover{background:#0e517c}
+.company-pdf-frame{display:block;width:100%;height:calc(100dvh - 210px);min-height:460px;border:1px solid #dce6ed;border-radius:8px;background:#fff}
+.company-pdf-alt{margin:8px 0 16px;font-size:13px;color:#516b7b}
+@media(max-width:780px){.company-pdf-frame{height:calc(100dvh - 155px);min-height:400px}.company-pdf-toolbar{padding:10px 0}}
