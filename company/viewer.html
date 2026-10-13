@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제조사 회사소개 PDF | HR COMP</title>
+<link rel="stylesheet" href="../assets/css/style.css"><link rel="stylesheet" href="../assets/css/company-direct.css?v=20261013b"></head>
+<body><header class="top"><div class="wrap nav"><a class="logo" href="../index.html">HR<span>COMP</span></a><button class="menu-btn" aria-label="메뉴 열기">☰</button><nav class="links"><a href="../index.html">HOME</a><a href="index.html">COMPANY</a><a href="../business/index.html">BUSINESS</a><a href="../products/index.html">PRODUCTS</a><a href="../contact/index.html">CONTACT</a></nav></div></header>
+<main class="wrap"><div class="company-pdf-toolbar"><a class="company-back" href="index.html">← 회사소개로 돌아가기</a><strong id="maker-title">제조사 회사소개</strong></div>
+<iframe id="company-pdf" class="company-pdf-frame" title="제조사 회사소개 카탈로그" loading="eager"></iframe>
+<p class="company-pdf-alt">PDF가 표시되지 않으면 <a id="pdf-open" href="#" target="_blank" rel="noopener">PDF 별도 창에서 열기</a>를 이용해 주세요.</p></main>
+<script>const items={sanhua:{title:'SANHUA 회사소개',pdf:'../catalog/sanhua-about.pdf'},highly:{title:'HIGHLY 회사소개 · Sales Network',pdf:'../catalog/highly-about.pdf'}};
+const maker=new URLSearchParams(location.search).get('maker');const item=items[maker];
+if(item){document.title=item.title+' | HR COMP';document.getElementById('maker-title').textContent=item.title;document.getElementById('company-pdf').src=item.pdf;document.getElementById('pdf-open').href=item.pdf;}
+else{document.getElementById('company-pdf').remove();document.getElementById('maker-title').textContent='제조사를 선택해 주세요';document.querySelector('.company-pdf-alt').remove();}
+</script><script src="../assets/js/main.js"></script></body></html>
