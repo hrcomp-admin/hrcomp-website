@@ -9,19 +9,12 @@
 .company-pdf-alt{margin:8px 0 16px;font-size:13px;color:#516b7b}
 @media(max-width:780px){.company-pdf-frame{height:calc(100dvh - 155px);min-height:400px}.company-pdf-toolbar{padding:10px 0}}
 
-/* Company catalogue: in-page rendering, persistent return action. */
-.company-view-main{max-width:1100px;margin:0 auto;padding:0 12px 24px}
+
+/* COMPANY: static image pages, browser-native pinch zoom. */
+.company-view-main{max-width:1100px;margin:0 auto;padding:0 12px 32px}
 .company-view-toolbar{position:sticky;top:0;z-index:10;background:#fff;display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:12px 0;border-bottom:1px solid #dbe6ed}
 .company-view-toolbar strong{font-size:16px;color:#173b55}
-.company-back{display:inline-block;text-decoration:none;background:#176c9e;color:#fff!important;border-radius:8px;padding:11px 14px;font-size:14px;font-weight:700}
-.company-view-status{font-size:12px;color:#557187;padding:10px 2px}
-.company-pages{width:100%;overflow:visible}
-.company-page{margin:0 auto 14px;min-height:150px;text-align:center;color:#6c7f8a;background:#f5f8fa}
-.company-page canvas{display:block;margin:auto;max-width:100%;height:auto!important}
-@media(max-width:780px){.company-view-main{padding:0 4px 20px}.company-view-toolbar{padding:8px 4px;gap:7px}.company-view-toolbar strong{font-size:12px}.company-back{padding:10px 11px;font-size:13px}}
-
-/* COMPANY shares PRODUCTS PDF viewer scrolling and page styling. */
-.company-pages{width:100%;max-height:78vh;overflow:auto!important;touch-action:pan-x pan-y}
-.company-pages .pdf-page{margin-bottom:8px!important}
-.company-pages .pdf-page canvas{max-width:none!important;height:auto;transform:none!important}
-@media(max-width:780px){.company-pages{max-height:78vh;padding:1px}}
+.company-image-pages{width:100%;padding-top:12px}
+.company-image-page{margin:0 auto 16px;max-width:100%;background:#fff}
+.company-image-page img{display:block;width:100%;height:auto;max-width:100%;}
+@media(max-width:780px){.company-view-main{padding:0 4px 20px}.company-view-toolbar{padding:8px 4px;gap:7px}.company-view-toolbar strong{font-size:12px}.company-back{padding:10px 11px;font-size:13px}.company-image-pages{padding-top:5px}.company-image-page{margin-bottom:8px}}
