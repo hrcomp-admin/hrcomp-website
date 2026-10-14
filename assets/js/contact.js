@@ -1,4 +1,4 @@
-fetch('../data/site.json').then(r=>{if(!r.ok)throw Error();return r.json()}).then(d=>{
+fetch('../data/site.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(d=>{
  const el=document.querySelector('#contact-data');el.replaceChildren();
  const entries=[['회사명',d.company],['전화',d.phone],['이메일',d.contact_email],['주소',d.address]];
  for(const [name,value] of entries){if(!String(value||'').trim())continue;
