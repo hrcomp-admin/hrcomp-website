@@ -12,3 +12,6 @@
  .bailu-viewer{max-height:78dvh;overflow:auto;overscroll-behavior:contain;touch-action:pan-x pan-y}
  .bailu-image-link{cursor:default}
 }
+
+/* Prevent browser scroll anchoring from fighting finger-centred zoom. */
+.bailu-viewer,.bailu-page{overflow-anchor:none}
