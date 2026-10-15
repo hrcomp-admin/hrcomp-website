@@ -19,5 +19,12 @@
     "order": 3,
     "active": true,
     "data": "products/bailu.json"
+  },
+  {
+    "id": "JELPC",
+    "name": "JELPC",
+    "order": 4,
+    "active": false,
+    "data": "products/jelpc.json"
   }
 ]
