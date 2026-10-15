@@ -240,52 +240,64 @@ Promise.resolve().then(async()=>{const r=await fetch('../data/manufacturers.json
     controls.append(minus,label,plus,reset);imageBox.append(controls);
     const viewer=element('div','bailu-viewer');let zoom=100;
     const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
-    // Image catalogues use the same finger-centred principle as the PDF viewer.
-    // Anchor to the actual page/image under the fingers, not to scrollTop*scale:
-    // page captions, BAILU Korean panels and gaps do not scale with images.
-    const applyZoom=(next,point)=>{
-      const old=zoom;
-      const value=clamp(next,100,300);
-      if(Math.abs(value-old)<0.01)return;
-      const focus=point||{x:viewer.clientWidth/2,y:viewer.clientHeight/2};
-      const vr=viewer.getBoundingClientRect();
-      const clientX=vr.left+focus.x, clientY=vr.top+focus.y;
+    // Fix a single image-space anchor at pinch START. Recalculating the anchor
+    // on every touchmove makes the page drift as its layout changes.
+    const imageAt=(clientX,clientY)=>{
       const target=document.elementFromPoint(clientX,clientY);
-      const page=target?.closest('.bailu-page') || [...viewer.querySelectorAll('.bailu-page')].find(p=>{
-        const r=p.getBoundingClientRect();return r.top<=clientY&&r.bottom>=clientY;
-      }) || viewer.querySelector('.bailu-page');
-      const img=page?.querySelector('.bailu-page-image');
-      const before=img?.getBoundingClientRect();
-      const anchorX=before&&before.width ? clamp((clientX-before.left)/before.width,0,1):0.5;
-      const anchorY=before&&before.height ? clamp((clientY-before.top)/before.height,0,1):0.5;
-      const scrollX=viewer.scrollLeft,scrollY=viewer.scrollTop;
+      const page=(target&&viewer.contains(target)?target.closest('.bailu-page'):null)
+        || [...viewer.querySelectorAll('.bailu-page')].find(p=>{const r=p.getBoundingClientRect();return r.top<=clientY&&r.bottom>=clientY;});
+      return (page||viewer.querySelector('.bailu-page'))?.querySelector('.bailu-page-image');
+    };
+    const anchorAt=(clientX,clientY)=>{
+      const img=imageAt(clientX,clientY);
+      if(!img)return null;
+      const r=img.getBoundingClientRect();
+      return {img,rx:r.width?clamp((clientX-r.left)/r.width,0,1):.5,
+        ry:r.height?clamp((clientY-r.top)/r.height,0,1):.5};
+    };
+    const moveAnchorTo=(anchor,clientX,clientY)=>{
+      if(!anchor)return;
+      const r=anchor.img.getBoundingClientRect();
+      // Correct actual DOM geometry, including page captions, margins and
+      // earlier pages. Both scroll axes are adjusted in the same coordinate system.
+      viewer.scrollLeft+=(r.left+r.width*anchor.rx)-clientX;
+      viewer.scrollTop+=(r.top+r.height*anchor.ry)-clientY;
+    };
+    const applyZoom=(next,anchor,clientX,clientY)=>{
+      const value=clamp(next,100,300);
+      if(Math.abs(value-zoom)<.01)return;
       zoom=value;
       viewer.querySelectorAll('.bailu-page-image').forEach(im=>{im.style.width=zoom+'%';});
       label.textContent=Math.round(zoom)+'%';
       viewer.classList.toggle('is-zoomed',zoom>100);
-      if(img&&before){
-        const after=img.getBoundingClientRect();
-        viewer.scrollLeft=scrollX+(after.left+after.width*anchorX)-(before.left+before.width*anchorX);
-        viewer.scrollTop=scrollY+(after.top+after.height*anchorY)-(before.top+before.height*anchorY);
-      }
+      moveAnchorTo(anchor,clientX,clientY);
       if(zoom===100)viewer.scrollLeft=0;
     };
-    minus.onclick=()=>applyZoom(zoom-25);
-    plus.onclick=()=>applyZoom(zoom+25);
-    reset.onclick=()=>applyZoom(100);
+    const buttonZoom=delta=>{
+      const r=viewer.getBoundingClientRect();
+      const x=r.left+viewer.clientWidth/2,y=r.top+Math.min(viewer.clientHeight/2,300);
+      applyZoom(delta===0?100:zoom+delta,anchorAt(x,y),x,y);
+    };
+    minus.onclick=()=>buttonZoom(-25);
+    plus.onclick=()=>buttonZoom(25);
+    reset.onclick=()=>buttonZoom(0);
     const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
     const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
-    let pinch=null, suppressClickUntil=0;
+    let pinch=null,suppressClickUntil=0;
     viewer.addEventListener('touchstart',e=>{
       if(e.touches.length!==2)return;
-      pinch={distance:Math.max(1,distance(e.touches)),zoom};
+      const mid=midpoint(e.touches);
+      pinch={distance:Math.max(1,distance(e.touches)),zoom,anchor:anchorAt(mid.x,mid.y)};
       suppressClickUntil=Date.now()+700;
-    },{passive:true});
+      e.preventDefault();
+    },{passive:false});
     viewer.addEventListener('touchmove',e=>{
       if(!pinch||e.touches.length!==2)return;
       e.preventDefault();
-      const mid=midpoint(e.touches),rect=viewer.getBoundingClientRect();
-      applyZoom(pinch.zoom*distance(e.touches)/pinch.distance,{x:mid.x-rect.left,y:mid.y-rect.top});
+      const mid=midpoint(e.touches);
+      applyZoom(pinch.zoom*distance(e.touches)/pinch.distance,pinch.anchor,mid.x,mid.y);
+      // Follow a translating finger midpoint even if zoom itself is unchanged.
+      moveAnchorTo(pinch.anchor,mid.x,mid.y);
       suppressClickUntil=Date.now()+700;
     },{passive:false});
     viewer.addEventListener('touchend',e=>{if(e.touches.length<2)pinch=null},{passive:true});
