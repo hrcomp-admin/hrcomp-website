@@ -1,0 +1,62 @@
+[
+  {
+    "id": "h-1",
+    "maker": "HIGHLY",
+    "category": "Compressor",
+    "name": "전체 압축기 Series",
+    "series": "Compressor Series",
+    "start": 12,
+    "end": 15,
+    "catalog": "catalog/highly-2026.pdf",
+    "image": "assets/images/highly/series.webp",
+    "source": "HIGHLY 2026 Rotary Compressor Catalogue",
+    "hero_image": "assets/images/highly/series.webp",
+    "series_pdf": "catalog/series/h-1-series.pdf",
+    "function": "HIGHLY 압축기 제품군의 주요 Series를 한눈에 소개합니다."
+  },
+  {
+    "id": "h-2",
+    "maker": "HIGHLY",
+    "category": "Compressor",
+    "name": "Room Air Conditioners",
+    "series": "RAC",
+    "start": 16,
+    "end": 28,
+    "catalog": "catalog/highly-2026.pdf",
+    "image": "assets/images/highly/rac.webp",
+    "source": "HIGHLY 2026 Rotary Compressor Catalogue",
+    "hero_image": "assets/images/highly/rac.webp",
+    "series_pdf": "catalog/series/h-2-rac.pdf",
+    "function": "가정용 에어컨과 주거용 냉난방 분야에 적용되는 압축기 제품군입니다."
+  },
+  {
+    "id": "h-3",
+    "maker": "HIGHLY",
+    "category": "Compressor",
+    "name": "Light Commercial AC",
+    "series": "PAC",
+    "start": 29,
+    "end": 43,
+    "catalog": "catalog/highly-2026.pdf",
+    "image": "assets/images/highly/pac.webp",
+    "source": "HIGHLY 2026 Rotary Compressor Catalogue",
+    "hero_image": "assets/images/highly/pac.webp",
+    "series_pdf": "catalog/series/h-3-pac.pdf",
+    "function": "학교·상업시설·호텔 등 경상업용 냉난방 분야의 압축기 제품군입니다."
+  },
+  {
+    "id": "h-4",
+    "maker": "HIGHLY",
+    "category": "Compressor",
+    "name": "Non-Residential AC",
+    "series": "NRAC",
+    "start": 44,
+    "end": 56,
+    "catalog": "catalog/highly-2026.pdf",
+    "image": "assets/images/highly/nrac.webp",
+    "source": "HIGHLY 2026 Rotary Compressor Catalogue",
+    "hero_image": "assets/images/highly/nrac.webp",
+    "series_pdf": "catalog/series/h-4-nrac.pdf",
+    "function": "비주거용 냉난방 및 관련 설비 분야의 압축기 제품군입니다."
+  }
+]
