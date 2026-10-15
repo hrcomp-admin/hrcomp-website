@@ -205,7 +205,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     reset(){updateZoom(1)}
   };
 }
-fetch('../data/products.json?v=cm20261012b').then(r=>{if(!r.ok)throw Error('product data');return r.json()}).then(async data=>{
+fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('product data');return r.json()}).then(async data=>{
   const x=data.find(v=>v.id===id);
   if(!x){box.textContent='해당 제품을 찾을 수 없습니다.';return}
   document.title=x.series+' | HR COMP';
@@ -227,6 +227,33 @@ fetch('../data/products.json?v=cm20261012b').then(r=>{if(!r.ok)throw Error('prod
   }
   info.append(element('p','lead series-pages','원본 카탈로그 '+x.start+'–'+x.end+'페이지'));
   const actions=element('div','actions');const back=element('a','btn light','← 제품 목록으로 돌아가기');back.href='index.html?maker='+encodeURIComponent(x.maker);actions.append(back);info.append(actions);section.append(visual,info);
+  // BAILU: four original catalogue pages as static images; other PDF viewers untouched.
+  if(x.image_pages && x.image_pages.length){
+    const imageBox=element('section','pdfbox bailu-image-catalog');
+    imageBox.append(element('h3','','제품 기술자료 · 압력스위치'));
+    imageBox.append(element('p','lead','제조사 원본 카탈로그 3~6페이지 · 이미지를 클릭하면 원본 크기로 열립니다.'));
+    const controls=element('div','bailu-controls');
+    const minus=element('button','pdf-control','−');minus.type='button';minus.setAttribute('aria-label','이미지 축소');
+    const label=element('span','pdf-zoom','100%');
+    const plus=element('button','pdf-control','+');plus.type='button';plus.setAttribute('aria-label','이미지 확대');
+    const reset=element('button','pdf-control','100%');reset.type='button';reset.setAttribute('aria-label','원래 크기');
+    controls.append(minus,label,plus,reset);imageBox.append(controls);
+    const viewer=element('div','bailu-viewer');let zoom=100;
+    const applyZoom=()=>{label.textContent=zoom+'%';viewer.querySelectorAll('.bailu-page-image').forEach(im=>{im.style.width=zoom+'%';});};
+    minus.onclick=()=>{zoom=Math.max(100,zoom-25);applyZoom()};
+    plus.onclick=()=>{zoom=Math.min(250,zoom+25);applyZoom()};
+    reset.onclick=()=>{zoom=100;applyZoom()};
+    x.image_pages.forEach((src,i)=>{
+      const page=element('div','bailu-page');
+      page.append(element('div','pdf-page-label','원본 카탈로그 '+(x.start+i)+'페이지'));
+      const link=element('a','bailu-image-link');link.href='../'+src;link.target='_blank';link.rel='noopener noreferrer';link.title='이미지 원본 크기로 열기';
+      const img=element('img','bailu-page-image');img.src='../'+src;img.alt='BAILU 압력스위치 원본 카탈로그 '+(x.start+i)+'페이지';img.loading=i===0?'eager':'lazy';img.decoding='async';
+      link.append(img);page.append(link);viewer.append(page);
+    });
+    imageBox.append(viewer);box.replaceChildren(section,imageBox);
+    if(x.note)box.append(element('p','notice',x.note));
+    return;
+  }
   // HIGHLY Compressor Series (h-1): same static-image presentation as COMPANY.
   // Other product series continue using their original PDF.js viewer unchanged.
   if(x.id==='h-1'){

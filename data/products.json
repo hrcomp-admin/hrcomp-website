@@ -568,5 +568,25 @@
     "hero_image": "assets/images/highly/nrac.webp",
     "series_pdf": "catalog/series/h-4-nrac.pdf",
     "function": "비주거용 냉난방 및 관련 설비 분야의 압축기 제품군입니다."
+  },
+  {
+    "id": "bailu-pressure-switch",
+    "maker": "BAILU",
+    "category": "압력스위치",
+    "name": "압력스위치 (Pressure Switch)",
+    "series": "압력스위치",
+    "start": 3,
+    "end": 6,
+    "source": "BAILU 제조사 원본 카탈로그",
+    "hero_image": "assets/images/bailu/pressure-switch-card.webp",
+    "image": "assets/images/bailu/pressure-switch-card.webp",
+    "image_pages": [
+      "assets/images/bailu/page-03.webp",
+      "assets/images/bailu/page-04.webp",
+      "assets/images/bailu/page-05.webp",
+      "assets/images/bailu/page-06.webp"
+    ],
+    "function": "냉동·공조 설비의 압력을 감지하여 접점을 제어하는 압력스위치입니다. 자동복귀형과 수동복귀형 제품 및 기술사양을 함께 확인할 수 있습니다.",
+    "note": "원본 카탈로그 이미지 3~6페이지. 모델별 압력 설정값 및 치수는 제조사 자료를 확인해 주십시오."
   }
 ]
