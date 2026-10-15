@@ -227,7 +227,7 @@ fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('pr
   }
   info.append(element('p','lead series-pages','원본 카탈로그 '+x.start+'–'+x.end+'페이지'));
   const actions=element('div','actions');const back=element('a','btn light','← 제품 목록으로 돌아가기');back.href='index.html?maker='+encodeURIComponent(x.maker);actions.append(back);info.append(actions);section.append(visual,info);
-  // BAILU: four original catalogue pages as static images; other PDF viewers untouched.
+  // BAILU: six original catalogue pages as static images; other PDF viewers untouched.
   if(x.image_pages && x.image_pages.length){
     const imageBox=element('section','pdfbox bailu-image-catalog');
     imageBox.append(element('h3','','제품 기술자료 · 압력스위치'));
@@ -282,6 +282,8 @@ fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('pr
       const page=element('div','bailu-page');
       page.append(element('div','pdf-page-label','BAILU 제조사 원본 카탈로그 '+(x.start+i)+'페이지 / '+x.end+'페이지'));
       const koPanels=[
+        ['제조사 소개 | BAILU','회사 소개','BAILU 제조사의 회사 소개 자료입니다.','원본 안내','회사 소개 원문은 아래 제조사 원본 이미지에서 확인하실 수 있습니다.'],
+        ['제조사 소개 | BAILU (영문)','회사 소개','BAILU 제조사의 영문 회사 소개 자료입니다.','원본 안내','제조사 정보와 인증 관련 내용은 원본 카탈로그를 기준으로 확인하십시오.'],
         ['자동복귀형 압력스위치 | BLPS-YKHL','용도','냉동·공조 시스템 및 공기압축기 등에서 고압 또는 저압을 감지하고 전기 접점을 개폐하여 장비를 보호·제어합니다.','주요 특징','나사식·동관 용접식 등 연결 방식을 선택할 수 있으며, 단자형·리드선형 접속과 상시 열림/상시 닫힘 접점 구성을 제공합니다. 설정 압력 범위는 모델별로 확인하십시오.'],
         ['수동복귀형 압력스위치 | BLPS-YKM','용도','냉동·공조 장비 등에서 압력 이상 발생 시 회로를 차단하고, 조건을 확인한 뒤 수동으로 복귀시키는 압력 보호 장치입니다.','주요 특징','연결 및 전기 접속 방식이 다양하며, 자동복귀를 방지하는 수동 리셋 구조를 적용합니다. 모델별 압력 범위와 복귀 조건은 원본 기술자료를 확인하십시오.'],
         ['외형도 및 치수 | BLPS-YK 계열','도면 안내','연결부, 리드선, 단자 및 설치 형태에 따른 외형도입니다.','확인 사항','도면의 단위는 mm이며, 실제 선정 시 모델별 연결 방식·치수·장착 방향을 원본 도면과 대조하십시오.'],
