@@ -240,20 +240,35 @@ Promise.resolve().then(async()=>{const r=await fetch('../data/manufacturers.json
     controls.append(minus,label,plus,reset);imageBox.append(controls);
     const viewer=element('div','bailu-viewer');let zoom=100;
     const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+    // Image catalogues use the same finger-centred principle as the PDF viewer.
+    // Anchor to the actual page/image under the fingers, not to scrollTop*scale:
+    // page captions, BAILU Korean panels and gaps do not scale with images.
     const applyZoom=(next,point)=>{
       const old=zoom;
-      zoom=clamp(next,100,300);
-      if(Math.abs(zoom-old)<0.01)return;
+      const value=clamp(next,100,300);
+      if(Math.abs(value-old)<0.01)return;
       const focus=point||{x:viewer.clientWidth/2,y:viewer.clientHeight/2};
-      const contentX=viewer.scrollLeft+focus.x;
-      const contentY=viewer.scrollTop+focus.y;
+      const vr=viewer.getBoundingClientRect();
+      const clientX=vr.left+focus.x, clientY=vr.top+focus.y;
+      const target=document.elementFromPoint(clientX,clientY);
+      const page=target?.closest('.bailu-page') || [...viewer.querySelectorAll('.bailu-page')].find(p=>{
+        const r=p.getBoundingClientRect();return r.top<=clientY&&r.bottom>=clientY;
+      }) || viewer.querySelector('.bailu-page');
+      const img=page?.querySelector('.bailu-page-image');
+      const before=img?.getBoundingClientRect();
+      const anchorX=before&&before.width ? clamp((clientX-before.left)/before.width,0,1):0.5;
+      const anchorY=before&&before.height ? clamp((clientY-before.top)/before.height,0,1):0.5;
+      const scrollX=viewer.scrollLeft,scrollY=viewer.scrollTop;
+      zoom=value;
       viewer.querySelectorAll('.bailu-page-image').forEach(im=>{im.style.width=zoom+'%';});
       label.textContent=Math.round(zoom)+'%';
       viewer.classList.toggle('is-zoomed',zoom>100);
-      // Keep the location under the fingers fixed during pinch/zoom.
-      viewer.scrollLeft=Math.max(0,contentX*zoom/old-focus.x);
-      viewer.scrollTop=Math.max(0,contentY*zoom/old-focus.y);
-      if(zoom===100){viewer.scrollLeft=0;viewer.scrollTop=0;}
+      if(img&&before){
+        const after=img.getBoundingClientRect();
+        viewer.scrollLeft=scrollX+(after.left+after.width*anchorX)-(before.left+before.width*anchorX);
+        viewer.scrollTop=scrollY+(after.top+after.height*anchorY)-(before.top+before.height*anchorY);
+      }
+      if(zoom===100)viewer.scrollLeft=0;
     };
     minus.onclick=()=>applyZoom(zoom-25);
     plus.onclick=()=>applyZoom(zoom+25);
