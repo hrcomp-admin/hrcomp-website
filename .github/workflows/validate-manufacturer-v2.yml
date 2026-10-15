@@ -1,0 +1,44 @@
+name: Validate manufacturer V2
+on:
+  pull_request:
+  push:
+    branches: [feature/manufacturer-v2-20261015]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JavaScript syntax
+        run: |
+          node --check assets/js/products.js
+          node --check assets/js/detail.js
+      - name: Validate manufacturer data and local asset paths
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const makers=JSON.parse(fs.readFileSync('data/manufacturers.json'));
+          const ids=new Set();
+          let count=0;
+          for(const m of makers){
+            if(ids.has(m.id))throw Error('Duplicate maker: '+m.id);
+            ids.add(m.id);
+            const products=JSON.parse(fs.readFileSync('data/'+m.data));
+            for(const p of products){
+              if(p.maker!==m.id)throw Error('Maker mismatch: '+p.id);
+              if(!p.id||!p.series)throw Error('Invalid product');
+              if(m.active!==false){
+                for(const key of ['image','hero_image','catalog','series_pdf']){
+                  if(p[key]&&!fs.existsSync(p[key]))throw Error('Missing '+p[key]);
+                }
+                for(const path of p.image_pages||[]){
+                  if(!fs.existsSync(path))throw Error('Missing '+path);
+                }
+              }
+              count++;
+            }
+          }
+          console.log('Validated '+count+' products in '+makers.length+' manufacturers');
+          NODE

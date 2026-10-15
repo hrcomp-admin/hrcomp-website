@@ -205,7 +205,7 @@ async function renderPages(x, viewer, status, zoomLabel) {
     reset(){updateZoom(1)}
   };
 }
-fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('product data');return r.json()}).then(async data=>{
+Promise.resolve().then(async()=>{const r=await fetch('../data/manufacturers.json',{cache:'no-store'});if(!r.ok)throw Error('manufacturer registry');const makers=await r.json();const datasets=await Promise.all(makers.filter(m=>m.active!==false).map(async m=>{const res=await fetch('../data/'+m.data,{cache:'no-store'});if(!res.ok)throw Error(m.id);return res.json()}));return datasets.flat()}).then(async data=>{
   const x=data.find(v=>v.id===id);
   if(!x){box.textContent='해당 제품을 찾을 수 없습니다.';return}
   document.title=x.series+' | HR COMP';
@@ -230,8 +230,8 @@ fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('pr
   // BAILU: six original catalogue pages as static images; other PDF viewers untouched.
   if(x.image_pages && x.image_pages.length){
     const imageBox=element('section','pdfbox bailu-image-catalog');
-    imageBox.append(element('h3','','제품 기술자료 · 압력스위치'));
-    imageBox.append(element('p','lead','한글 안내 시범판 · 제품 사진과 원본 도면·사양을 함께 제공합니다. 상세 수치는 제조사 원본을 기준으로 확인하십시오.'));
+    imageBox.append(element('h3','','제품 기술자료 · '+x.series));
+    imageBox.append(element('p','lead',x.maker==='BAILU'?'한글 안내 시범판 · 제품 사진과 원본 도면·사양을 함께 제공합니다. 상세 수치는 제조사 원본을 기준으로 확인하십시오.':'제조사 원본 카탈로그를 제공합니다.'));
     const controls=element('div','bailu-controls');
     const minus=element('button','pdf-control','−');minus.type='button';minus.setAttribute('aria-label','이미지 축소');
     const label=element('span','pdf-zoom','100%');
@@ -280,7 +280,7 @@ fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('pr
     },true);
     x.image_pages.forEach((src,i)=>{
       const page=element('div','bailu-page');
-      page.append(element('div','pdf-page-label','BAILU 제조사 원본 카탈로그 '+(x.start+i)+'페이지 / '+x.end+'페이지'));
+      page.append(element('div','pdf-page-label',x.maker+' 제조사 원본 카탈로그 '+(x.start+i)+'페이지 / '+x.end+'페이지'));
       const koPanels=[
         ['제조사 소개 | BAILU','회사 소개','BAILU 제조사의 회사 소개 자료입니다.','원본 안내','회사 소개 원문은 아래 제조사 원본 이미지에서 확인하실 수 있습니다.'],
         ['제조사 소개 | BAILU (영문)','회사 소개','BAILU 제조사의 영문 회사 소개 자료입니다.','원본 안내','제조사 정보와 인증 관련 내용은 원본 카탈로그를 기준으로 확인하십시오.'],
@@ -289,15 +289,15 @@ fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('pr
         ['외형도 및 치수 | BLPS-YK 계열','도면 안내','연결부, 리드선, 단자 및 설치 형태에 따른 외형도입니다.','확인 사항','도면의 단위는 mm이며, 실제 선정 시 모델별 연결 방식·치수·장착 방향을 원본 도면과 대조하십시오.'],
         ['기술사양 및 압력 설정값','사양 안내','압력 설정 범위, 압력 허용오차, 접점 형식, 접점 용량, 절연 특성, 사용 온도 및 내구성 등의 기술자료입니다.','주의 사항','표의 수치·단위와 모델별 개폐 압력은 오역을 방지하기 위해 아래 제조사 원본 표를 그대로 제공합니다. 구매 및 설계 적용 전 해당 모델의 사양을 재확인하십시오.']
       ];
-      const k=koPanels[i];
-      const panel=element('div','bailu-ko-panel');
+      const k=x.maker==='BAILU'?koPanels[i]:null;
+      if(k){const panel=element('div','bailu-ko-panel');
       panel.style.cssText='box-sizing:border-box;background:#f0fbff;border:1px solid #b9e7f4;border-radius:12px;padding:22px 24px;margin:12px auto 18px;max-width:1024px;line-height:1.85;color:#15334b;';
       const h=element('h3','',k[0]);h.style.cssText='font-size:clamp(20px,2.4vw,29px);margin:0 0 12px;color:#0075a6';panel.append(h);
       for(let z=1;z<5;z+=2){const label=element('strong','',k[z]);label.style.cssText='display:block;margin-top:9px;color:#086b94';panel.append(label);const desc=element('p','',k[z+1]);desc.style.cssText='margin:3px 0 10px;font-size:clamp(15px,1.5vw,18px)';panel.append(desc);}
-      page.append(panel);
-      page.append(element('div','pdf-page-label','제조사 원본 이미지 · '+(x.start+i)+'페이지 (도면 및 수치 확인용)'));
+      page.append(panel);}
+      page.append(element('div','pdf-page-label','제조사 원본 이미지 · '+(x.start+i)+'페이지'));
       const link=element('a','bailu-image-link');link.href='../'+src;link.target='_blank';link.rel='noopener noreferrer';link.title='이미지 원본 크기로 열기';
-      const img=element('img','bailu-page-image');img.src='../'+src;img.alt='BAILU 압력스위치 원본 카탈로그 '+(x.start+i)+'페이지';img.loading=i===0?'eager':'lazy';img.decoding='async';
+      const img=element('img','bailu-page-image');img.src='../'+src;img.alt=x.maker+' 원본 카탈로그 '+(x.start+i)+'페이지';img.loading=i===0?'eager':'lazy';img.decoding='async';
       link.append(img);page.append(link);viewer.append(page);
     });
     imageBox.append(viewer);box.replaceChildren(section,imageBox);

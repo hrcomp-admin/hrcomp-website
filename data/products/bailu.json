@@ -1,0 +1,24 @@
+[
+  {
+    "id": "bailu-pressure-switch",
+    "maker": "BAILU",
+    "category": "압력스위치",
+    "name": "압력스위치 (Pressure Switch)",
+    "series": "압력스위치",
+    "start": 1,
+    "end": 6,
+    "source": "BAILU 제조사 원본 카탈로그",
+    "hero_image": "assets/images/bailu/pressure-switch-card.webp",
+    "image": "assets/images/bailu/pressure-switch-card.webp",
+    "image_pages": [
+      "assets/images/bailu/page-01.jpg",
+      "assets/images/bailu/page-02.jpg",
+      "assets/images/bailu/page-03.jpg",
+      "assets/images/bailu/page-04.jpg",
+      "assets/images/bailu/page-05.webp",
+      "assets/images/bailu/page-06.webp"
+    ],
+    "function": "냉동·공조 설비의 압력을 감지하여 접점을 제어하는 압력스위치입니다. 자동복귀형과 수동복귀형 제품 및 기술사양을 함께 확인할 수 있습니다.",
+    "note": "한글 설명 시범판입니다. 기술사양 표·도면의 원문은 원본 이미지로 보존했습니다. 최종 번역은 고해상도 원본 확인 후 확정하십시오."
+  }
+]

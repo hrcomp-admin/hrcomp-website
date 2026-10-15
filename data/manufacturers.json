@@ -1,0 +1,30 @@
+[
+  {
+    "id": "HIGHLY",
+    "name": "HIGHLY",
+    "order": 1,
+    "active": true,
+    "data": "products/highly.json"
+  },
+  {
+    "id": "SANHUA",
+    "name": "SANHUA",
+    "order": 2,
+    "active": true,
+    "data": "products/sanhua.json"
+  },
+  {
+    "id": "BAILU",
+    "name": "BAILU",
+    "order": 3,
+    "active": true,
+    "data": "products/bailu.json"
+  },
+  {
+    "id": "JELPC",
+    "name": "JELPC",
+    "order": 4,
+    "active": true,
+    "data": "products/jelpc.json"
+  }
+]
