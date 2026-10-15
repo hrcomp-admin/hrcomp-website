@@ -280,7 +280,7 @@ fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('pr
     },true);
     x.image_pages.forEach((src,i)=>{
       const page=element('div','bailu-page');
-      page.append(element('div','pdf-page-label','압력스위치 기술자료 '+(i+1)+' / 4'));
+      page.append(element('div','pdf-page-label','BAILU 제조사 원본 카탈로그 '+(x.start+i)+'페이지 / '+x.end+'페이지'));
       const koPanels=[
         ['자동복귀형 압력스위치 | BLPS-YKHL','용도','냉동·공조 시스템 및 공기압축기 등에서 고압 또는 저압을 감지하고 전기 접점을 개폐하여 장비를 보호·제어합니다.','주요 특징','나사식·동관 용접식 등 연결 방식을 선택할 수 있으며, 단자형·리드선형 접속과 상시 열림/상시 닫힘 접점 구성을 제공합니다. 설정 압력 범위는 모델별로 확인하십시오.'],
         ['수동복귀형 압력스위치 | BLPS-YKM','용도','냉동·공조 장비 등에서 압력 이상 발생 시 회로를 차단하고, 조건을 확인한 뒤 수동으로 복귀시키는 압력 보호 장치입니다.','주요 특징','연결 및 전기 접속 방식이 다양하며, 자동복귀를 방지하는 수동 리셋 구조를 적용합니다. 모델별 압력 범위와 복귀 조건은 원본 기술자료를 확인하십시오.'],
