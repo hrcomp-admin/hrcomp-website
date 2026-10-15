@@ -231,7 +231,7 @@ fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('pr
   if(x.image_pages && x.image_pages.length){
     const imageBox=element('section','pdfbox bailu-image-catalog');
     imageBox.append(element('h3','','제품 기술자료 · 압력스위치'));
-    imageBox.append(element('p','lead','제조사 원본 카탈로그 3~6페이지 · 이미지를 클릭하면 원본 크기로 열립니다.'));
+    imageBox.append(element('p','lead','한글 안내 시범판 · 제품 사진과 원본 도면·사양을 함께 제공합니다. 상세 수치는 제조사 원본을 기준으로 확인하십시오.'));
     const controls=element('div','bailu-controls');
     const minus=element('button','pdf-control','−');minus.type='button';minus.setAttribute('aria-label','이미지 축소');
     const label=element('span','pdf-zoom','100%');
@@ -245,7 +245,20 @@ fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('pr
     reset.onclick=()=>{zoom=100;applyZoom()};
     x.image_pages.forEach((src,i)=>{
       const page=element('div','bailu-page');
-      page.append(element('div','pdf-page-label','원본 카탈로그 '+(x.start+i)+'페이지'));
+      page.append(element('div','pdf-page-label','압력스위치 기술자료 '+(i+1)+' / 4'));
+      const koPanels=[
+        ['자동복귀형 압력스위치 | BLPS-YKHL','용도','냉동·공조 시스템 및 공기압축기 등에서 고압 또는 저압을 감지하고 전기 접점을 개폐하여 장비를 보호·제어합니다.','주요 특징','나사식·동관 용접식 등 연결 방식을 선택할 수 있으며, 단자형·리드선형 접속과 상시 열림/상시 닫힘 접점 구성을 제공합니다. 설정 압력 범위는 모델별로 확인하십시오.'],
+        ['수동복귀형 압력스위치 | BLPS-YKM','용도','냉동·공조 장비 등에서 압력 이상 발생 시 회로를 차단하고, 조건을 확인한 뒤 수동으로 복귀시키는 압력 보호 장치입니다.','주요 특징','연결 및 전기 접속 방식이 다양하며, 자동복귀를 방지하는 수동 리셋 구조를 적용합니다. 모델별 압력 범위와 복귀 조건은 원본 기술자료를 확인하십시오.'],
+        ['외형도 및 치수 | BLPS-YK 계열','도면 안내','연결부, 리드선, 단자 및 설치 형태에 따른 외형도입니다.','확인 사항','도면의 단위는 mm이며, 실제 선정 시 모델별 연결 방식·치수·장착 방향을 원본 도면과 대조하십시오.'],
+        ['기술사양 및 압력 설정값','사양 안내','압력 설정 범위, 압력 허용오차, 접점 형식, 접점 용량, 절연 특성, 사용 온도 및 내구성 등의 기술자료입니다.','주의 사항','표의 수치·단위와 모델별 개폐 압력은 오역을 방지하기 위해 아래 제조사 원본 표를 그대로 제공합니다. 구매 및 설계 적용 전 해당 모델의 사양을 재확인하십시오.']
+      ];
+      const k=koPanels[i];
+      const panel=element('div','bailu-ko-panel');
+      panel.style.cssText='box-sizing:border-box;background:#f0fbff;border:1px solid #b9e7f4;border-radius:12px;padding:22px 24px;margin:12px auto 18px;max-width:1024px;line-height:1.85;color:#15334b;';
+      const h=element('h3','',k[0]);h.style.cssText='font-size:clamp(20px,2.4vw,29px);margin:0 0 12px;color:#0075a6';panel.append(h);
+      for(let z=1;z<5;z+=2){const label=element('strong','',k[z]);label.style.cssText='display:block;margin-top:9px;color:#086b94';panel.append(label);const desc=element('p','',k[z+1]);desc.style.cssText='margin:3px 0 10px;font-size:clamp(15px,1.5vw,18px)';panel.append(desc);}
+      page.append(panel);
+      page.append(element('div','pdf-page-label','제조사 원본 이미지 · '+(x.start+i)+'페이지 (도면 및 수치 확인용)'));
       const link=element('a','bailu-image-link');link.href='../'+src;link.target='_blank';link.rel='noopener noreferrer';link.title='이미지 원본 크기로 열기';
       const img=element('img','bailu-page-image');img.src='../'+src;img.alt='BAILU 압력스위치 원본 카탈로그 '+(x.start+i)+'페이지';img.loading=i===0?'eager':'lazy';img.decoding='async';
       link.append(img);page.append(link);viewer.append(page);
