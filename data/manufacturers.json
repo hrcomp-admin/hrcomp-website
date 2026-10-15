@@ -24,7 +24,7 @@
     "id": "JELPC",
     "name": "JELPC",
     "order": 4,
-    "active": false,
+    "active": true,
     "data": "products/jelpc.json"
   }
 ]
