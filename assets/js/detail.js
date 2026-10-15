@@ -239,10 +239,45 @@ fetch('../data/products.json?v=20261015bailu').then(r=>{if(!r.ok)throw Error('pr
     const reset=element('button','pdf-control','100%');reset.type='button';reset.setAttribute('aria-label','원래 크기');
     controls.append(minus,label,plus,reset);imageBox.append(controls);
     const viewer=element('div','bailu-viewer');let zoom=100;
-    const applyZoom=()=>{label.textContent=zoom+'%';viewer.querySelectorAll('.bailu-page-image').forEach(im=>{im.style.width=zoom+'%';});};
-    minus.onclick=()=>{zoom=Math.max(100,zoom-25);applyZoom()};
-    plus.onclick=()=>{zoom=Math.min(250,zoom+25);applyZoom()};
-    reset.onclick=()=>{zoom=100;applyZoom()};
+    const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+    const applyZoom=(next,point)=>{
+      const old=zoom;
+      zoom=clamp(next,100,300);
+      if(Math.abs(zoom-old)<0.01)return;
+      const focus=point||{x:viewer.clientWidth/2,y:viewer.clientHeight/2};
+      const contentX=viewer.scrollLeft+focus.x;
+      const contentY=viewer.scrollTop+focus.y;
+      viewer.querySelectorAll('.bailu-page-image').forEach(im=>{im.style.width=zoom+'%';});
+      label.textContent=Math.round(zoom)+'%';
+      viewer.classList.toggle('is-zoomed',zoom>100);
+      // Keep the location under the fingers fixed during pinch/zoom.
+      viewer.scrollLeft=Math.max(0,contentX*zoom/old-focus.x);
+      viewer.scrollTop=Math.max(0,contentY*zoom/old-focus.y);
+      if(zoom===100){viewer.scrollLeft=0;viewer.scrollTop=0;}
+    };
+    minus.onclick=()=>applyZoom(zoom-25);
+    plus.onclick=()=>applyZoom(zoom+25);
+    reset.onclick=()=>applyZoom(100);
+    const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+    const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
+    let pinch=null, suppressClickUntil=0;
+    viewer.addEventListener('touchstart',e=>{
+      if(e.touches.length!==2)return;
+      pinch={distance:Math.max(1,distance(e.touches)),zoom};
+      suppressClickUntil=Date.now()+700;
+    },{passive:true});
+    viewer.addEventListener('touchmove',e=>{
+      if(!pinch||e.touches.length!==2)return;
+      e.preventDefault();
+      const mid=midpoint(e.touches),rect=viewer.getBoundingClientRect();
+      applyZoom(pinch.zoom*distance(e.touches)/pinch.distance,{x:mid.x-rect.left,y:mid.y-rect.top});
+      suppressClickUntil=Date.now()+700;
+    },{passive:false});
+    viewer.addEventListener('touchend',e=>{if(e.touches.length<2)pinch=null},{passive:true});
+    viewer.addEventListener('touchcancel',()=>{pinch=null},{passive:true});
+    viewer.addEventListener('click',e=>{
+      if(Date.now()<suppressClickUntil){e.preventDefault();e.stopPropagation();}
+    },true);
     x.image_pages.forEach((src,i)=>{
       const page=element('div','bailu-page');
       page.append(element('div','pdf-page-label','압력스위치 기술자료 '+(i+1)+' / 4'));
