@@ -1,0 +1,32 @@
+[
+  {
+    "id": "jelpc-pneumatic",
+    "maker": "JELPC",
+    "category": "공압기기",
+    "name": "방향제어기기 · 구동기기 · 에어 클린 유니트 · 공압 부속품",
+    "series": "JELPC 공압기기",
+    "start": 1,
+    "end": 15,
+    "hero_image": "assets/images/jelpc/page-01.jpg",
+    "image": "assets/images/jelpc/page-01.jpg",
+    "function": "JELPC 제조사 공압기기 원본 카탈로그",
+    "source": "JELPC 제조사 원본 카탈로그",
+    "image_pages": [
+      "assets/images/jelpc/page-01.jpg",
+      "assets/images/jelpc/page-02.jpg",
+      "assets/images/jelpc/page-03.jpg",
+      "assets/images/jelpc/page-04.jpg",
+      "assets/images/jelpc/page-05.jpg",
+      "assets/images/jelpc/page-06.jpg",
+      "assets/images/jelpc/page-07.jpg",
+      "assets/images/jelpc/page-08.jpg",
+      "assets/images/jelpc/page-09.jpg",
+      "assets/images/jelpc/page-10.jpg",
+      "assets/images/jelpc/page-11.jpg",
+      "assets/images/jelpc/page-12.jpg",
+      "assets/images/jelpc/page-13.jpg",
+      "assets/images/jelpc/page-14.jpg",
+      "assets/images/jelpc/page-15.jpg"
+    ]
+  }
+]
