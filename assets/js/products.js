@@ -9,7 +9,7 @@ function productVisual(x){
       return `<div class="series-card-visual manufacturer-visual highly-original-card"><img src="${esc(src)}" alt="HIGHLY ${esc(x.series)} 제조사 카탈로그 이미지" loading="lazy"></div>`;}
     return `<div class="series-card-visual manufacturer-visual highly-card-visual"><span class="highly-card-maker">HIGHLY</span><strong>${esc(x.series)}</strong><small>COMPRESSOR</small></div>`;
   }
-  const src=x.maker==='BAILU'?'../'+x.hero_image:'../assets/images/product-cards/'+encodeURIComponent(x.id)+'.webp';
+  const src=(x.maker==='BAILU'||x.maker==='JELPC')?'../'+(x.hero_image||x.image):'../assets/images/product-cards/'+encodeURIComponent(x.id)+'.webp';
   return `<div class="series-card-visual manufacturer-visual"><img src="${esc(src)}" alt="${esc(x.series)} 제품 이미지" loading="lazy"></div>`;
 }
 cards.innerHTML=[...groups].map(([title,items])=>`<section class="catalog-group"><h2>${esc(title)} <small>${items.length}개</small></h2><div class="grid3">${items.map(x=>`<a class="panel product-card-v1" href="detail.html?id=${encodeURIComponent(x.id)}">${productVisual(x)}<div class="body"><span class="tag">${esc(x.maker)} · ${esc(x.category)}</span><h3>${esc(x.series)}</h3><p>${esc(x.name)}</p><p class="product-card-function">${esc(x.function||'')}</p><b>카탈로그 상세보기 →</b></div></a>`).join('')}</div></section>`).join('')}
