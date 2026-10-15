@@ -295,7 +295,7 @@ Promise.resolve().then(async()=>{const r=await fetch('../data/manufacturers.json
       const h=element('h3','',k[0]);h.style.cssText='font-size:clamp(20px,2.4vw,29px);margin:0 0 12px;color:#0075a6';panel.append(h);
       for(let z=1;z<5;z+=2){const label=element('strong','',k[z]);label.style.cssText='display:block;margin-top:9px;color:#086b94';panel.append(label);const desc=element('p','',k[z+1]);desc.style.cssText='margin:3px 0 10px;font-size:clamp(15px,1.5vw,18px)';panel.append(desc);}
       page.append(panel);}
-      page.append(element('div','pdf-page-label','제조사 원본 이미지 · '+(x.start+i)+'페이지 (도면 및 수치 확인용)'));
+      page.append(element('div','pdf-page-label','제조사 원본 이미지 · '+(x.start+i)+'페이지'));
       const link=element('a','bailu-image-link');link.href='../'+src;link.target='_blank';link.rel='noopener noreferrer';link.title='이미지 원본 크기로 열기';
       const img=element('img','bailu-page-image');img.src='../'+src;img.alt=x.maker+' 원본 카탈로그 '+(x.start+i)+'페이지';img.loading=i===0?'eager':'lazy';img.decoding='async';
       link.append(img);page.append(link);viewer.append(page);
